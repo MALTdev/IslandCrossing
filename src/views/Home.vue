@@ -169,7 +169,6 @@ function getPreviousBirthday() {
       this.birthdaySelected--
       return
   }
-
   this.birthdaySelected = this.birthdays.length - 1
 }
 
@@ -178,7 +177,6 @@ function getNextBirthday() {
       this.birthdaySelected = 0
       return
   }
-
   this.birthdaySelected++
 }
 
