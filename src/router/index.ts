@@ -26,6 +26,46 @@ const router = createRouter({
       component: Register,
     },
     {
+      path: "/villagers",
+      name: "villagers",
+      component: Home,
+    },
+    {
+      path: "/characters",
+      name: "characters",
+      component: Home,
+    },
+    {
+      path: "/locations",
+      name: "locations",
+      component: Home,
+    },
+    {
+      path: "/musics",
+      name: "musics",
+      component: Home,
+    },
+    {
+      path: "/bugs",
+      name: "bugs",
+      component: Home,
+    },
+    {
+      path: "/fishes",
+      name: "fishes",
+      component: Home,
+    },
+    {
+      path: "/creatures",
+      name: "creatures",
+      component: Home,
+    },
+    {
+      path: "/fossils",
+      name: "fossils",
+      component: Home,
+    },
+    {
       path: "/profile",
       name: "profile",
       component: Profile,
