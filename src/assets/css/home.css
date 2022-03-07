@@ -1,0 +1,130 @@
+/**
+ ********************
+ * SECTION WELCOME  *
+ ********************
+ */
+#section-welcome {
+	position: relative;
+	padding-top: 150px;
+	padding-bottom: 50px;
+}
+
+/* ---------- SECTION WELCOME - FLEX ---------- */
+#section-trees-and-board, #section-trees-left, #section-trees-right {
+	display: flex;
+	justify-content: space-around;
+	align-items: flex-end;
+}
+
+#section-board, #section-trees-left, #section-trees-right {
+	width: 30%;
+	z-index: 1;
+}
+
+/* ---------- SECTION WELCOME - TREES ---------- */
+#section-trees-left, #section-trees-right {
+	transform: translateY(25px);
+}
+
+/* ---------- SECTION WELCOME - TABLEAU ---------- */
+#section-board::after {
+    content: "Bienvenue sur\aIsland Crossing";
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: fit-content;
+	white-space: pre;
+	color: black;
+	font-weight: bold;
+	font-size: 2.8em;
+}
+
+/* ---------- SECTION WELCOME - ABSOLUTE : ballon cadeau, ... ---------- */
+#section-absolute {
+	display: contents;
+}
+
+#balloon {
+	position: absolute;
+	max-width: 4%;
+	top: 15px;
+	right: 210px;
+}
+
+/* ---------- IMAGE BOTTOM ---------- */
+#section-welcome::after {
+	content: "";
+	background-image: url('@/assets/images/patterns/herbes.jpg');
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 50px;
+	border-radius: 150px 150px 0 0;
+}
+
+/* ---------- MEDIA QUERIES ---------- */
+@media (max-width: 1000px) {
+	#section-trees-left, #section-trees-right {
+		display: none;
+	}
+
+	#section-board {
+		width: 70%;
+	}
+
+	#section-board::after {
+		font-size: 3em;
+	}
+}
+
+@media (max-width: 1500px) {
+	#section-board::after {
+		font-size: 1.7em;
+	}
+}
+
+/**
+ ********************
+ *   SECTION MENU   *
+ ********************
+ */
+#section-menu-wiki {
+	display:flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 25px 20%;
+}
+
+#section-menu-wiki .item-menu {
+	width: 25%;
+	padding: 45px 0;
+}
+
+#section-menu-wiki .item-menu-rounded {
+	width: 100px;
+	height: 100px;
+	max-width: 100%;
+	margin: 0 auto;
+	display: flex;
+	border-radius: 50px;
+	overflow: hidden;
+}
+
+#section-menu-wiki .item-menu-rounded img {
+	width: 100%;
+}
+
+.item-menu-router {
+	text-decoration: none;
+}
+
+.item-menu-text {
+	font-size: 1.5em;
+	font-weight: bold;
+	color: #000;
+}
