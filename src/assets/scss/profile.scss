@@ -1,0 +1,17 @@
+main {
+  background-color: $primary;
+}
+
+.row-profil {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.console-reaction {
+  display: flex;
+}
+
+.console-reaction > .reaction {
+  margin: auto;
+}

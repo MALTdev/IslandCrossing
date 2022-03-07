@@ -48,6 +48,14 @@
           </div>
         </q-card-section>
       </q-card>
+      <q-card class="text-center col-4 q-ma-lg bg-primary">
+        <q-card-section>
+          <div class="text-left">
+            <q-img src="@/assets/images/pencil.png" style="height: 50px; max-width: 50px"></q-img>
+            Publications partagées
+          </div>
+        </q-card-section>
+      </q-card>
     </div>
   </q-page>
 </template>
@@ -57,6 +65,6 @@ import { useUserStore } from "@/stores/user";
 const { user } = useUserStore();
 </script>
 
-<style>
-@import '@/assets/profile/profile.css';
+<style lang="scss">
+  @import '@/assets/scss/profile.scss';
 </style>
