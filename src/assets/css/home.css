@@ -52,7 +52,7 @@
 	position: absolute;
 	max-width: 4%;
 	top: 15px;
-	right: 210px;
+	right: 10%;
 }
 
 /* ---------- IMAGE BOTTOM ---------- */
@@ -96,8 +96,8 @@
 #section-menu-wiki {
 	display:flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
-	padding: 25px 20%;
+	justify-content: space-around;
+	padding: 25px 18%;
 }
 
 #section-menu-wiki .item-menu {
@@ -127,4 +127,26 @@
 	font-size: 1.5em;
 	font-weight: bold;
 	color: #000;
+}
+
+/* ---------- MEDIA QUERIES ---------- */
+@media (max-width: 800px) {
+	#section-menu-wiki .item-menu {
+		width: 30%;
+		padding: 45px 0;
+	}
+}
+
+@media (max-width: 600px) {
+	#section-menu-wiki .item-menu {
+		width: 40%;
+		padding: 45px 0;
+	}
+}
+
+@media (max-width: 400px) {
+	#section-menu-wiki .item-menu {
+		width: 100%;
+		padding: 45px 0;
+	}
 }
