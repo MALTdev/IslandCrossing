@@ -150,3 +150,48 @@
 		padding: 45px 0;
 	}
 }
+
+/**
+ ***********************
+ * SECTION PUBLICATION *
+ ***********************
+ */
+ #section-last-publications {
+	background-image: url('@/assets/images/patterns/herbes.jpg');
+	background-repeat: repeat;
+	padding: 140px 0 0 0;
+ }
+
+ #section-last-publications::before {
+	content: "";
+	background-image: url('@/assets/images/apple_border_top.png');
+	background-repeat: no-repeat;
+	position: absolute;
+	top: -100px;
+	left: 0;
+	right: 0;
+	height: -webkit-fill-available;
+}
+
+ #publications {
+	 display: flex;
+	 flex-wrap: wrap;
+	 padding: 25px 18%;
+	 justify-content: space-around;
+ }
+
+ #publications .publication-image {
+	 max-height: 150px;
+	 overflow: hidden;
+	 border-radius: 20px;
+ }
+
+ #publications .publication {
+	 width: 30%;
+ }
+
+ .publication-title {
+	 display: block;
+	 margin-top: 20px;
+	 font-size: 1.4em;
+ }

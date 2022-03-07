@@ -42,11 +42,36 @@
         </router-link>
       </div>
     </section>
+
+    <section id="section-happy-birthday">
+      <h2>Les anniversaires des habitants, le {{ dateNow }}</h2>
+    </section>
+
+    <section id="section-last-publications">
+      <h2>Articles publiées par les joueurs</h2>
+      <div id="publications">
+        <div
+          class="publication"
+          v-for="publication in publications"
+          :key="publication.id"
+        >
+          <div class="publication-image">
+            <q-img v-if="publication.image" alt="Bannière de la publication" :src="'src/assets/images/publications/' + publication.image"/>
+            <q-img v-else alt="Bannière de la publication" src="@/assets/images/publications/default_banner.png"/>
+          </div>
+          <span class="publication-title">{{ publication.title }}</span>
+        </div>
+      </div>
+    </section>
+
   </q-page>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import moment from 'moment'
+
+const dateNow = ref<String>(moment().format('DD/MM'))
 
 const itemsMenu = ref<Array<Object>>([
   {
@@ -88,6 +113,21 @@ const itemsMenu = ref<Array<Object>>([
     icon: 'fossil.png',
     text: 'Fossiles',
     routes: 'fossils',
+  }
+])
+
+const publications = ref<Array<Object>>([
+  {
+    id: 1,
+    title: 'Title 1',
+  },
+  {
+    id: 2,
+    title: 'Title 2',
+  },
+  {
+    id: 3,
+    title: 'Title 3',
   }
 ])
 </script>
