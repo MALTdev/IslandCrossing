@@ -7,9 +7,6 @@ import Login from "@/views/Auth/Login.vue";
 import Register from "@/views/Auth/Register.vue";
 import Profile from "@/views/Auth/Profile.vue";
 
-// Profil
-import Profil from "@/views/Profil/Profil.vue";
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -28,11 +25,6 @@ const router = createRouter({
       name: "register",
       component: Register,
     },
-    {
-      path: "/profil",
-      name: "profil",
-      component: Profil,
-    }
     {
       path: "/profile",
       name: "profile",
