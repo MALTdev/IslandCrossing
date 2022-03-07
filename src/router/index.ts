@@ -5,6 +5,7 @@ import Home from "@/views/Home.vue";
 // Auth
 import Login from "@/views/Auth/Login.vue";
 import Register from "@/views/Auth/Register.vue";
+import Profile from "@/views/Auth/Profile.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,6 +24,11 @@ const router = createRouter({
       path: "/register",
       name: "register",
       component: Register,
+    },
+    {
+      path: "/profile",
+      name: "profile",
+      component: Profile,
     },
     // route level code-splitting
     // this generates a separate chunk (About.[hash].js) for this route
