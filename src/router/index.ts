@@ -7,6 +7,10 @@ import Login from "@/views/Auth/Login.vue";
 import Register from "@/views/Auth/Register.vue";
 import Profile from "@/views/Auth/Profile.vue";
 
+// Blog
+import Blog from "@/views/Blog/Blog.vue";
+import BlogPost from "@/views/Blog/BlogPost.vue";
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -69,6 +73,16 @@ const router = createRouter({
       path: "/profile",
       name: "profile",
       component: Profile,
+    },
+    {
+      path: "/blog",
+      name: "blog",
+      component: Blog,
+    },
+    {
+      path: "/blog/:slug",
+      name: "blog-post",
+      component: BlogPost,
     },
     // route level code-splitting
     // this generates a separate chunk (About.[hash].js) for this route
