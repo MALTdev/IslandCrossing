@@ -6,6 +6,7 @@ import Home from "@/views/Home.vue";
 import Login from "@/views/Auth/Login.vue";
 import Register from "@/views/Auth/Register.vue";
 import Profile from "@/views/Auth/Profile.vue";
+import ProfileUpdate from "@/views/Auth/ProfileUpdate.vue";
 
 // Blog
 import Blog from "@/views/Blog/Blog.vue";
@@ -73,6 +74,11 @@ const router = createRouter({
       path: "/profile",
       name: "profile",
       component: Profile,
+    },
+    {
+      path: "/profile/update",
+      name: "profile-update",
+      component: ProfileUpdate,
     },
     {
       path: "/blog",
