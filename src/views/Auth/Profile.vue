@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="text-center col-4 q-ma-lg-sm">
-        <q-btn  rounded color="accent" label="Modifier mon profil" text-color="black"/>
+        <q-btn :to="{ name: 'profile-update' }" rounded color="accent" label="Modifier mon profil" text-color="black"/>
       </div>
       <q-card class="text-center col-4 q-ma-lg bg-accent">
         <q-card-section>
