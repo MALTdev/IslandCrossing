@@ -70,14 +70,29 @@ import { RouterLink } from "vue-router";
 import router from "@/router";
 import { ref } from "vue";
 
+import { useQuasar } from "quasar";
 import { useUserStore } from "@/stores/user";
+
+const $q = useQuasar();
 const userStore = useUserStore();
 
 const audio_playing = ref<Boolean>(false);
 
 async function logout() {
-  await userStore.logout();
-  router.push({ name: "login" });
+  try {
+    $q.notify({
+      message: `À très bientôt ${userStore.user.username} !`,
+      type: "positive",
+    });
+
+    await userStore.logout();
+    router.push({ name: "login" });
+  } catch (error) {
+    $q.notify({
+      message: "Une erreur est survenu lors de la déconnexion.",
+      type: "negative",
+    });
+  }
 }
 
 function toggleAudio() {
