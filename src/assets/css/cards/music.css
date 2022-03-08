@@ -1,0 +1,48 @@
+.music {
+	width: 10%;
+	padding-bottom: 50px;
+	cursor: pointer;
+	filter: grayscale(0.2);
+}
+
+.music:hover {
+	filter: grayscale(0);
+}
+
+.music-image {
+	max-height: 250px;
+}
+
+.music-name > span {
+	font-size: 1.5em;
+}
+
+@media (max-width: 1500px) {
+	.music {
+		width: 15%;
+	}
+}
+
+@media (max-width: 1200px) {
+	.music {
+		width: 26%;
+	}
+}
+
+@media (max-width: 800px) {
+	.music {
+		width: 30%;
+	}
+}
+
+@media (max-width: 800px) {
+	.music {
+		width: 45%;
+	}
+}
+
+@media (max-width: 800px) {
+	.music {
+		width: 90%;
+	}
+}

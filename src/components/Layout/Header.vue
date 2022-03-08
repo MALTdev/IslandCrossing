@@ -24,7 +24,7 @@
       </div>
 
       <div class="col-3 text-right">
-        <audio src="./src/assets/audios/theme.mp3" loop autoplay="autoplay"></audio>
+        <audio src="../src/assets/audios/theme.mp3" loop></audio>
         <q-btn
             @click="toggleAudio()"
             :icon="audio_playing ? 'fas fa-volume-up' : 'fas fa-volume-mute'"
