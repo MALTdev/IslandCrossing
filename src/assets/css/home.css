@@ -93,6 +93,10 @@
  *   SECTION MENU   *
  ********************
  */
+.grayscale {
+	filter: grayscale(1);
+}
+
 #section-menu-wiki {
 	display:flex;
 	flex-wrap: wrap;

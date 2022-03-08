@@ -59,11 +59,6 @@ const router = createRouter({
       component: Character,
     },
     {
-      path: "/locations",
-      name: "locations",
-      component: Home,
-    },
-    {
       path: "/musics",
       name: "musics",
       component: Home,

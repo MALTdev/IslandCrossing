@@ -30,6 +30,7 @@
         :key="item.icon"
       >
         <router-link
+          v-if="item.route"
           class="item-menu-router"
           :to="{name: item.route}"
         >
@@ -40,6 +41,15 @@
           </div>
           <span class="item-menu-text">{{ item.text }}</span>
         </router-link>
+
+        <div v-else class="item-menu-router">
+          <div
+            class="item-menu-rounded disabled grayscale"
+          >
+            <q-img :src="'src/assets/images/menu/' + item.icon" fit="contain"/>
+          </div>
+          <span class="item-menu-text">Bientôt !</span>
+        </div>
       </div>
     </section>
 
@@ -103,7 +113,6 @@ const itemsMenu = ref<Array<Object>>([
   {
     icon: 'location.png',
     text: 'Lieux',
-    route: 'locations',
   },
   {
     icon: 'music.png',
@@ -128,7 +137,7 @@ const itemsMenu = ref<Array<Object>>([
   {
     icon: 'fossil.png',
     text: 'Fossiles',
-    routes: 'fossils',
+    route: 'fossils',
   }
 ])
 
