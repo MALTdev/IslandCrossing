@@ -1,0 +1,57 @@
+#section-villager-detail {
+	max-width: 1300px;
+	margin: 40px auto 0 auto;
+}
+
+#section-villager-detail-top {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50px 50px 0 0;
+	padding: 25px 10px 0 10px;
+}
+
+#section-villager-detail-bottom {
+	border-radius: 0 0 50px 50px;
+	background-color: #eee;
+	padding: 25px 10px;
+}
+
+#section-villager-detail-top > .first-section, #section-villager-detail-top > .third-section {
+	width: 25%;
+}
+
+#section-villager-detail-top > .second-section {
+	width: 50%;
+}
+
+.villager-image {
+	max-height: 250px;
+}
+
+.villager-image-species {
+	max-height: 100px;
+}
+
+.villager-image-house {
+	margin-top: 15px;
+	height: 300px;
+	max-height: fit-content;
+}
+
+.villager-name {
+	display: block;
+	min-width: max-content;
+	width: 50%;
+	margin: 0 auto;
+	padding: 7px 0;
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+@media (max-width: 550px) {
+	#section-villager-detail-top {
+		flex-direction: column;
+	}
+}

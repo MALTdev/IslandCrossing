@@ -193,5 +193,6 @@ function getNextBirthday() {
 <style scoped>
   main {
     padding: 0;
+    background-color: #eee;
   }
 </style>
