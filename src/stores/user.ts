@@ -1,43 +1,79 @@
+import { ref } from "vue";
 import { defineStore } from "pinia";
+import { useLocalStorage } from "@vueuse/core";
+import axios from "axios";
 
 interface User {
   id?: number;
+  api_token?: string;
   username?: string;
+  email?: string;
+  first_name?: string;
+  last_name?: string;
+  description?: string;
 }
 
 interface AuthForm {
-  username: string;
+  email: string;
   password: string;
 }
 
-export const useUserStore = defineStore("user", {
-  state: () => ({
-    user: {} as User,
-  }),
-  getters: {
-    //
-  },
-  actions: {
-    async login(form: AuthForm) {
-      // fetch('/api/login', { method: 'POST' }).then(r => r.json)
-      const id = 1;
-      const username = form.username;
-      this.user = {
+export const useUserStore = defineStore("userStore", () => {
+  const user = ref(useLocalStorage<User>("user", {}));
+
+  function login(form: AuthForm) {
+    return new Promise(async (resolve, reject) => {
+      const xsrfToken = await (await axios.get("/auth/token")).data;
+
+      const { success } = await (
+        await axios.post("/auth/login", form, {
+          headers: { "XSRF-TOKEN": xsrfToken },
+        })
+      ).data;
+
+      if (!success) return reject();
+
+      const { id, api_token } = await (
+        await axios.get("/auth/user_token")
+      ).data;
+
+      const userInformations = await (
+        await axios.get(`/api/users/${id}?api_token=${api_token}`)
+      ).data;
+
+      user.value = {
         id,
-        username,
+        api_token,
+        ...userInformations,
       };
-    },
-    async register(form: AuthForm) {
-      // fetch('/api/register', { method: 'POST' }).then(r => r.json)
-      const id = 1;
-      const username = form.username;
-      this.user = {
-        id,
-        username,
-      };
-    },
-    async logout() {
-      this.user = {};
-    },
-  },
+
+      return resolve(user.value.username);
+    });
+  }
+
+  async function register(form: AuthForm) {
+    // TODO
+  }
+
+  async function logout() {
+    return new Promise(async (resolve, reject) => {
+      const xsrfToken = await (await axios.get("/auth/token")).data;
+
+      const { success } = await (
+        await axios.post(
+          "/auth/logout",
+          {},
+          { headers: { "XSRF-TOKEN": xsrfToken } }
+        )
+      ).data;
+
+      if (!success) return reject();
+
+      user.value = {};
+
+      return resolve(true);
+    });
+  }
+
+  return { user, login, register, logout };
 });
