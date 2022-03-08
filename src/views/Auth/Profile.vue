@@ -15,7 +15,7 @@
           </div>
         </q-card-section>
         <q-card-section class="text-justify">
-          J’adore faire “Aouuuh” le matin dès 6h du matin après une bonne séance de sport :
+          J’adore faire “Aouuuuuuh” le matin dès 6h du matin après une bonne séance de sport :
           rien de mieux qu’un bon footing près de la plage, loin de cette méchante Éloïse.
         </q-card-section>
         <q-card-section>
