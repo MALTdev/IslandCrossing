@@ -8,7 +8,7 @@
             <strong>Mon profil</strong>
           </div>
           <div class="float-right">
-            <img src="src/assets/images/menu/villager.png" alt="">
+            <img src="@/assets/images/menu/villager.png" alt="">
             <div class="bg-brown pseudo-profile">
               Coucou {{ user.username }}
             </div>
