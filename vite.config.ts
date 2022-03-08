@@ -15,6 +15,20 @@ export default defineConfig({
       sassVariables: "src/assets/scss/quasar-variables.sass",
     }),
   ],
+  server: {
+    proxy: {
+      "/auth": {
+        target: "http://islandcrossing.anaelbonnafous.fr",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/auth/, ""),
+      },
+      "/api": {
+        target: "http://islandcrossing.anaelbonnafous.fr/api",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
+  },
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
