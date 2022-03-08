@@ -20,6 +20,10 @@ import Villager from "@/views/Villagers/Villager.vue";
 import Characters from "@/views/Characters/Characters.vue";
 import Character from "@/views/Characters/Character.vue";
 
+// Musics
+import Musics from "@/views/Musics/Musics.vue";
+import Music from "@/views/Musics/Music.vue";
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -61,7 +65,12 @@ const router = createRouter({
     {
       path: "/musics",
       name: "musics",
-      component: Home,
+      component: Musics,
+    },
+    {
+      path: "/musics/:id",
+      name: "music",
+      component: Music,
     },
     {
       path: "/bugs",
