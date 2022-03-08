@@ -85,6 +85,14 @@
             <q-img src="@/assets/images/pencil.png" style="height: 50px; max-width: 50px"></q-img>
             Publications partagées
           </div>
+          <div class="q-pa-md">
+            <div class="box-grid">
+              <div v-for="publis in listPublications" :key="publis.id">
+                <q-img :src="'src/assets/images/publications/' + publis.icon" style="max-width: 300px; height: 150px;" />
+                <div> {{ publis.text }} </div>
+              </div>
+            </div>
+          </div>
         </q-card-section>
       </q-card>
     </div>
@@ -224,6 +232,30 @@ const listCreature = ref<Array<Object>>([
     icon: 'creature.png',
     text: 'Creature6',
   }
+])
+
+const listPublications = ref<Array<Object>>([
+  {
+    id: 1,
+    icon: 'default_banner.png',
+    text: 'Publication1',
+  },
+  {
+    id: 2,
+    icon: 'default_banner.png',
+    text: 'Publication2',
+  },
+  {
+    id: 3,
+    icon: 'default_banner.png',
+    text: 'Publication3',
+  },
+  {
+    id: 4,
+    icon: 'default_banner.png',
+    text: 'Publication4',
+  }
+
 ])
 
 </script>
