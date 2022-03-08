@@ -1,8 +1,8 @@
 <template>
-  <q-header class="bg-primary" elevated reveal>
+  <q-header class="bg-secondary" elevated reveal>
     <q-toolbar class="row full-height">
       <div class="col-3 text-left">
-        <q-btn :to="{ name: 'blog' }" color="primary" unelevated>Blog</q-btn>
+        <q-btn :to="{ name: 'blog' }" color="secondary" unelevated>Blog</q-btn>
       </div>
 
       <div class="col-6 text-center">
@@ -27,7 +27,7 @@
         <template v-if="userStore.user.id">
           <q-btn-dropdown
             :label="userStore.user.username"
-            color="primary"
+            color="secondary"
             unelevated
           >
             <q-list>
@@ -45,10 +45,10 @@
           </q-btn-dropdown>
         </template>
         <template v-else>
-          <q-btn :to="{ name: 'login' }" color="primary" unelevated
+          <q-btn :to="{ name: 'login' }" color="secondary" unelevated
             >Connexion</q-btn
           >
-          <q-btn :to="{ name: 'register' }" color="primary" unelevated
+          <q-btn :to="{ name: 'register' }" color="secondary" unelevated
             >Inscription</q-btn
           >
         </template>
