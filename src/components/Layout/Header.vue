@@ -24,6 +24,14 @@
       </div>
 
       <div class="col-3 text-right">
+        <audio src="./src/assets/audios/theme.mp3" loop autoplay="autoplay"></audio>
+        <q-btn
+            @click="toggleAudio()"
+            :icon="audio_playing ? 'fas fa-volume-up' : 'fas fa-volume-mute'"
+            size="xs"
+            round
+            flat
+        />
         <template v-if="userStore.user.id">
           <q-btn-dropdown
             :label="userStore.user.username"
@@ -60,14 +68,28 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
 import router from "@/router";
+import { ref } from "vue";
 
 import { useUserStore } from "@/stores/user";
 const userStore = useUserStore();
+
+const audio_playing = ref<Boolean>(false);
 
 async function logout() {
   await userStore.logout();
   router.push({ name: "login" });
 }
+
+function toggleAudio() {
+  const audio = document.getElementsByTagName("audio")[0];
+  if (audio.paused) {
+    audio.play();
+  } else {
+    audio.pause();
+  }
+  this.audio_playing = !audio.paused;
+}
+
 </script>
 
 <style scoped lang="scss">
