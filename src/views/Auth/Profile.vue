@@ -4,9 +4,17 @@
       <q-card class="text-center col-4">
         <q-card-section>
           <span>Bonjour {{ user.username }} 👋</span>
-          <div class="text-h5 text-grey-8"><strong>Mon profil</strong></div>
+          <div class="text-h5 text-grey-8">
+            <strong>Mon profil</strong>
+          </div>
+          <div class="float-right">
+            <img src="src/assets/images/menu/villager.png" alt="">
+            <div class="bg-brown pseudo-profile">
+              Coucou {{ user.username }}
+            </div>
+          </div>
         </q-card-section>
-        <q-card-section>
+        <q-card-section class="text-justify">
           J’adore faire “Aouuuh” le matin dès 6h du matin après une bonne séance de sport :
           rien de mieux qu’un bon footing près de la plage, loin de cette méchante Éloïse.
         </q-card-section>
@@ -14,9 +22,10 @@
           <div class="text-left"><strong>Série préféré : </strong> Moderne </div>
         </q-card-section>
       </q-card>
-      <div class="text-center col-4 console-reaction q-ma-lg">
-        <div class="q-gutter-x-md text-left">
-          <q-btn color="secondary" v-for="platform in listPlatforms" :key="platform.platform" :label="platform.name"></q-btn>
+      <div class="text-center col-4 console-reaction q-mt-md q-mb-lg">
+        <div class="platform" v-for="platform in listPlatforms" :key="platform.platform">
+          <div class="q-mr-lg invisible platform-code">{{ platform.code }}</div>
+          <q-btn class="q-mr-lg" color="secondary" :label="platform.name"></q-btn>
         </div>
         <div class="reaction">
           <strong>Réaction la plus utilisée :  </strong>
@@ -38,7 +47,7 @@
               :space-between="5"
           >
             <swiper-slide v-for="insect in listInsect" :key="insect.id">
-              <img :src="'src/assets/images/menu/' + insect.icon">
+              <img class="img-insect-swiper" :src="'src/assets/images/menu/' + insect.icon">
             </swiper-slide>
           </swiper>
         </q-card-section>
@@ -56,7 +65,7 @@
               :space-between="5"
           >
             <swiper-slide v-for="fish in listFish" :key="fish.id">
-              <img :src="'src/assets/images/menu/' + fish.icon">
+              <img class="img-fish-swiper" :src="'src/assets/images/menu/' + fish.icon">
             </swiper-slide>
           </swiper>
         </q-card-section>
@@ -74,12 +83,12 @@
               :space-between="5"
           >
             <swiper-slide v-for="creature in listCreature" :key="creature.id">
-              <img :src="'src/assets/images/menu/' + creature.icon">
+              <img class="img-creatures-swiper" :src="'src/assets/images/menu/' + creature.icon">
             </swiper-slide>
           </swiper>
         </q-card-section>
       </q-card>
-      <q-card class="text-center col-4 q-ma-lg bg-primary">
+      <q-card class="text-center col-4 q-ma-lg bg-secondary">
         <q-card-section>
           <div class="text-left">
             <q-img src="@/assets/images/pencil.png" style="height: 50px; max-width: 50px"></q-img>
@@ -124,14 +133,17 @@ const listPlatforms = ref<Array<Object>>([
   {
     platform: 'DS',
     name: 'DS',
+    code: '1234567',
   },
   {
     platform: 'Wii',
     name: 'Wii',
+    code: '6895930928'
   },
   {
     platform: 'Switch',
     name: 'Switch',
+    code: '94948382'
   }
 ])
 
