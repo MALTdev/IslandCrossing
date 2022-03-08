@@ -157,6 +157,7 @@
  **************************
  */
 #section-happy-birthday {
+	background-color: #fff;
 	background: linear-gradient(90deg, rgba(238,238,238,0) 0%, rgba(157,255,176,1) 50%, rgba(238,238,238,0) 100%);
 	padding: 25px 0;
 }
