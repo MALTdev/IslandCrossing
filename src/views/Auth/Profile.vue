@@ -11,7 +11,7 @@
           rien de mieux qu’un bon footing près de la plage, loin de cette méchante Éloïse.
         </q-card-section>
         <q-card-section>
-          <div class="text-left"><strong>Série préféré : </strong></div>
+          <div class="text-left"><strong>Série préféré : </strong> Moderne </div>
         </q-card-section>
       </q-card>
       <div class="text-center col-4 console-reaction q-ma-lg">
