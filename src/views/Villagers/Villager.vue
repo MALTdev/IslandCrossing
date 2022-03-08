@@ -86,10 +86,10 @@ const villager = ref<Object>(
 
 </script>
 
-<style>
-  @import '@/assets/css/villager.css';
+<style scoped>
+  @import '@/assets/css/wiki/villager.css';
 </style>
 
-<style lang="scss">
-  @import '@/assets/scss/villager.scss';
+<style lang="scss" scoped>
+  @import '@/assets/scss/wiki/villager.scss';
 </style>

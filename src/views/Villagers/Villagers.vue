@@ -35,7 +35,7 @@
 		</q-card-section>
 	</q-card>
 
-	<section id="section-list-villagers">
+	<section id="section-list">
 		<Villager
 			v-for="villager in villagers"
 			:key="villager.id"
@@ -98,6 +98,6 @@ const villagers = ref<Array<Object>>([
 
 </script>
 
-<style>
-  @import '@/assets/css/villagers.css';
+<style scoped>
+  @import '@/assets/css/wiki/listing.css';
 </style>
