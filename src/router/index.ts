@@ -12,6 +12,10 @@ import ProfileUpdate from "@/views/Auth/ProfileUpdate.vue";
 import Blog from "@/views/Blog/Blog.vue";
 import BlogPost from "@/views/Blog/BlogPost.vue";
 
+// Villagers
+import Villagers from "@/views/Villagers/Villagers.vue";
+import Villager from "@/views/Villagers/Villager.vue";
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -33,7 +37,12 @@ const router = createRouter({
     {
       path: "/villagers",
       name: "villagers",
-      component: Home,
+      component: Villagers,
+    },
+    {
+      path: "/villagers/:id",
+      name: "villager",
+      component: Villager,
     },
     {
       path: "/characters",
