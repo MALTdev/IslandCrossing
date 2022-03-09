@@ -1,0 +1,38 @@
+.fish {
+	width: 15%;
+	border-radius: 50px 50px 0 0;
+	overflow: hidden;
+	padding-bottom: 50px;
+	cursor: pointer;
+}
+
+.fish-section-image {
+	background-image: url('@/assets/images/patterns/water.jpeg');
+}
+
+.fish-image {
+	max-height: 100px;
+}
+
+.fish-name > span {
+	font-size: 1.5em;
+}
+
+
+@media (max-width: 850px) {
+	.fish {
+		width: 17%;
+	}
+}
+
+@media (max-width: 600px) {
+	.fish {
+		width: 23%;
+	}
+}
+
+@media (max-width: 400px) {
+	.fish {
+		width: 45%;
+	}
+}
