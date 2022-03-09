@@ -122,7 +122,7 @@ const itemsMenu = ref<Array<Object>>([
   {
     icon: 'bug.png',
     text: 'Insectes',
-    route: 'bugs',
+    route: 'insects',
   },
   {
     icon: 'fish.png',
@@ -132,7 +132,7 @@ const itemsMenu = ref<Array<Object>>([
   {
     icon: 'creature.png',
     text: 'Créatures',
-    route: 'creatures',
+    route: 'sea-creatures',
   },
   {
     icon: 'fossil.png',

@@ -1,0 +1,38 @@
+.sea-creature {
+	width: 15%;
+	border-radius: 50px 50px 0 0;
+	overflow: hidden;
+	padding-bottom: 50px;
+	cursor: pointer;
+}
+
+.sea-creature-section-image {
+	background-image: url('@/assets/images/patterns/deep_water.jpg');
+}
+
+.sea-creature-image {
+	max-height: 100px;
+}
+
+.sea-creature-name > span {
+	font-size: 1.5em;
+}
+
+
+@media (max-width: 850px) {
+	.sea-creature {
+		width: 17%;
+	}
+}
+
+@media (max-width: 600px) {
+	.sea-creature {
+		width: 23%;
+	}
+}
+
+@media (max-width: 400px) {
+	.sea-creature {
+		width: 45%;
+	}
+}
