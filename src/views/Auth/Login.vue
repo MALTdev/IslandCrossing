@@ -50,9 +50,12 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
 import { RouterLink } from "vue-router";
-
-import { useUserStore } from "@/stores/user";
 import router from "@/router";
+
+import { useQuasar } from "quasar";
+import { useUserStore } from "@/stores/user";
+
+const $q = useQuasar();
 const userStore = useUserStore();
 
 const form = reactive({
@@ -62,8 +65,21 @@ const form = reactive({
 
 async function login() {
   const { username, password } = form;
-  await userStore.login({ username, password });
-  router.push({ name: "profile" });
+
+  try {
+    await userStore.login({ email: username, password });
+    router.push({ name: "profile" });
+
+    $q.notify({
+      message: `Bon retour parmi nous ${userStore.user.username} !`,
+      type: "positive",
+    });
+  } catch (error) {
+    $q.notify({
+      message: "Une erreur est survenu lors de la connexion.",
+      type: "negative",
+    });
+  }
 }
 
 const showPassword = ref(false);

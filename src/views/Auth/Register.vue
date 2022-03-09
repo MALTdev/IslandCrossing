@@ -61,9 +61,9 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
 import { RouterLink } from "vue-router";
+import router from "@/router";
 
 import { useUserStore } from "@/stores/user";
-import router from "@/router";
 const userStore = useUserStore();
 
 const form = reactive({
@@ -75,7 +75,7 @@ const form = reactive({
 
 async function register() {
   const { username, password } = form;
-  await userStore.register({ username, password });
+  await userStore.register({ email: username, password });
   router.push({ name: "profile" });
 }
 
