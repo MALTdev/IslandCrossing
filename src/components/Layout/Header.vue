@@ -88,9 +88,9 @@ async function logout() {
 
     await userStore.logout();
     router.push({ name: "login" });
-  } catch (error) {
+  } catch (error: any) {
     $q.notify({
-      message: "Une erreur est survenu lors de la déconnexion.",
+      message: error || "Une erreur est survenu lors de la déconnexion.",
       type: "negative",
     });
   }
