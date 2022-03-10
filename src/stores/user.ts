@@ -1,9 +1,9 @@
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import { useLocalStorage } from "@vueuse/core";
 import axios from "axios";
 
-interface User {
+export interface User {
   id?: number;
   api_token?: string;
   username?: string;
@@ -75,5 +75,9 @@ export const useUserStore = defineStore("userStore", () => {
     });
   }
 
-  return { user, login, register, logout };
+  const getToken = computed(() => {
+    return user.value.api_token;
+  })
+
+  return { user, login, register, logout, getToken };
 });
