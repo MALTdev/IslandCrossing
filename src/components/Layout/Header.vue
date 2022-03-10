@@ -27,8 +27,8 @@
         <audio src="../src/assets/audios/theme.mp3" loop></audio>
         <q-btn
             @click="toggleAudio()"
-            :icon="audio_playing ? 'fas fa-volume-up' : 'fas fa-volume-mute'"
-            size="xs"
+            icon="fab fa-soundcloud"
+            :class="audio_playing ? 'icon-sound' : 'icon-sound icon-sound-mute'"
             round
             flat
         />
@@ -62,6 +62,7 @@
         </template>
       </div>
     </q-toolbar>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/svg-with-js.min.css" integrity="sha512-T22AGZA32A7BJVwM85+3QTgGxP7lSHb88UwE3b19YtWs0mw6x27Pw5ea/60BQkcKO4vzzsXW230pxPdw6TthGQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </q-header>
 </template>
 

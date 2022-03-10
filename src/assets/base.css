@@ -96,3 +96,22 @@ table {
 table, td, th {
   border: 1px solid black;
 }
+
+.icon-sound {
+  font-size: 1.4em;
+  color: #000;
+}
+
+.icon-sound-mute:after {
+  content: '/';
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000000;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 1.4em;
+}
