@@ -128,14 +128,17 @@ const itemsMenu = ref<Array<Object>>([
   {
     icon: 'fish.png',
     text: 'Poissons',
+    route: 'fishes',
   },
   {
     icon: 'creature.png',
     text: 'Créatures',
+    route: 'sea-creatures',
   },
   {
     icon: 'fossil.png',
     text: 'Fossiles',
+    route: 'fossils',
   }
 ])
 
