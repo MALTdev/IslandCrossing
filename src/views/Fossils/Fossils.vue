@@ -10,7 +10,7 @@
 	</q-card>
 
 	<section id="section-list">
-		<Fossil
+		<FossilCard
 			v-for="fossil in fossils"
 			:key="fossil.id"
 			:id="fossil.id"
@@ -22,92 +22,29 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import Fossil from '@/components/Cards/Fossil.vue'
+import { onBeforeMount, reactive, ref } from 'vue'
+import FossilCard from '@/components/Cards/Fossil.vue'
+import { useQuasar } from "quasar";
+import { useFossilsStore } from "@/stores/fossils";
+import type { Fossil } from "@/stores/fossils";
 
-const fossils = ref<Array<Object>>([
-	{
-		id: 1,
-		name: 'Pachycéphalosaure',
-		image: 'https://static.wikia.nocookie.net/animalcrossing/images/6/65/Dino_001.jpg/revision/latest/scale-to-width-down/211?cb=20161021161334&path-prefix=fr',
-	},
-	{
-		id: 2,
-		name: 'Pachycéphalosaure',
-		image: 'https://static.wikia.nocookie.net/animalcrossing/images/6/65/Dino_001.jpg/revision/latest/scale-to-width-down/211?cb=20161021161334&path-prefix=fr',
-	},
-	{
-		id: 3,
-		name: 'Pachycéphalosaure',
-		image: 'https://static.wikia.nocookie.net/animalcrossing/images/6/65/Dino_001.jpg/revision/latest/scale-to-width-down/211?cb=20161021161334&path-prefix=fr',
-	},
-	{
-		id: 4,
-		name: 'Pachycéphalosaure',
-		image: 'https://static.wikia.nocookie.net/animalcrossing/images/6/65/Dino_001.jpg/revision/latest/scale-to-width-down/211?cb=20161021161334&path-prefix=fr',
-	},
-	{
-		id: 5,
-		name: 'Pachycéphalosaure',
-		image: 'https://static.wikia.nocookie.net/animalcrossing/images/6/65/Dino_001.jpg/revision/latest/scale-to-width-down/211?cb=20161021161334&path-prefix=fr',
-	},
-	{
-		id: 6,
-		name: 'Pachycéphalosaure',
-		image: 'https://static.wikia.nocookie.net/animalcrossing/images/6/65/Dino_001.jpg/revision/latest/scale-to-width-down/211?cb=20161021161334&path-prefix=fr',
-	},
-	{
-		id: 7,
-		name: 'Pachycéphalosaure',
-		image: 'https://static.wikia.nocookie.net/animalcrossing/images/6/65/Dino_001.jpg/revision/latest/scale-to-width-down/211?cb=20161021161334&path-prefix=fr',
-	},
-	{
-		id: 8,
-		name: 'Pachycéphalosaure',
-		image: 'https://static.wikia.nocookie.net/animalcrossing/images/6/65/Dino_001.jpg/revision/latest/scale-to-width-down/211?cb=20161021161334&path-prefix=fr',
-	},
-	{
-		id: 9,
-		name: 'Pachycéphalosaure',
-		image: 'https://static.wikia.nocookie.net/animalcrossing/images/6/65/Dino_001.jpg/revision/latest/scale-to-width-down/211?cb=20161021161334&path-prefix=fr',
-	},
-	{
-		id: 10,
-		name: 'Pachycéphalosaure',
-		image: 'https://static.wikia.nocookie.net/animalcrossing/images/6/65/Dino_001.jpg/revision/latest/scale-to-width-down/211?cb=20161021161334&path-prefix=fr',
-	},
-	{
-		id: 11,
-		name: 'Pachycéphalosaure',
-		image: 'https://static.wikia.nocookie.net/animalcrossing/images/6/65/Dino_001.jpg/revision/latest/scale-to-width-down/211?cb=20161021161334&path-prefix=fr',
-	},
-	{
-		id: 12,
-		name: 'Pachycéphalosaure',
-		image: 'https://static.wikia.nocookie.net/animalcrossing/images/6/65/Dino_001.jpg/revision/latest/scale-to-width-down/211?cb=20161021161334&path-prefix=fr',
-	},
-	{
-		id: 13,
-		name: 'Pachycéphalosaure',
-		image: 'https://static.wikia.nocookie.net/animalcrossing/images/6/65/Dino_001.jpg/revision/latest/scale-to-width-down/211?cb=20161021161334&path-prefix=fr',
-	},
-	{
-		id: 14,
-		name: 'Pachycéphalosaure',
-		image: 'https://static.wikia.nocookie.net/animalcrossing/images/6/65/Dino_001.jpg/revision/latest/scale-to-width-down/211?cb=20161021161334&path-prefix=fr',
-	},
-	{
-		id: 15,
-		name: 'Pachycéphalosaure',
-		image: 'https://static.wikia.nocookie.net/animalcrossing/images/6/65/Dino_001.jpg/revision/latest/scale-to-width-down/211?cb=20161021161334&path-prefix=fr',
-	},
-	{
-		id: 16,
-		name: 'Pachycéphalosaure',
-		image: 'https://static.wikia.nocookie.net/animalcrossing/images/6/65/Dino_001.jpg/revision/latest/scale-to-width-down/211?cb=20161021161334&path-prefix=fr',
+
+const $q = useQuasar();
+const fossilsStore = useFossilsStore();
+
+const fossils = ref<Array<Fossil>>([])
+
+onBeforeMount(async () => {
+	try {
+		fossils.value = await fossilsStore.getFossils();
+		console.log(fossils.value)
+	} catch (error) {
+		$q.notify({
+			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",
+			type: "negative",
+		});
 	}
-])
-
+})
 </script>
 
 <style scoped>

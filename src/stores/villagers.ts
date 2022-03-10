@@ -29,7 +29,7 @@ export interface Villager {
 export const useVillagersStore = defineStore("villagersStore", () => {
   const {getToken} = useUserStore()
 
-  function getAllVillagers() {
+  function getVillagers() {
     return new Promise(async (resolve, reject) => {
       const villagers = await (
         await axios.get(`/api/villagers?api_token=${getToken}`)
@@ -49,5 +49,5 @@ export const useVillagersStore = defineStore("villagersStore", () => {
     });
   }
 
-  return { getAllVillagers, getVillager };
+  return { getVillagers, getVillager };
 });

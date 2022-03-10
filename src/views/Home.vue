@@ -59,12 +59,14 @@
           <div id="happy-birthday-villager-card-and-icons">
             <q-card id="happy-birthday-villager-card">{{ birthdays[birthdaySelected].name }} fête son anniversaire aujourd'hui !</q-card>
             <div id="happy-birthday-village-change-villager" v-if="birthdays.length > 1">
-              <q-btn
-                icon="fas fa-carret-left"
+              <q-icon
+                class="icon-homepage"
+                name="fas fa-caret-square-left"
                 @click="getPreviousBirthday()"
               />
-              <q-btn
-                icon="fas fa-carret-right"
+              <q-icon
+                class="icon-homepage"
+                name="fas fa-caret-square-right"
                 @click="getNextBirthday()"
               />
             </div>
@@ -191,11 +193,11 @@ function getNextBirthday() {
 
 </script>
 
-<style>
+<style scoped>
   @import '@/assets/css/home.css';
 </style>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import '@/assets/scss/home.scss';
 </style>
 

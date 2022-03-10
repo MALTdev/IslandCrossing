@@ -212,6 +212,11 @@
 	margin-top: 30px;
 }
 
+.icon-homepage {
+	cursor: pointer;
+	font-size: 2.5em;
+}
+
 /* ---------- MEDIA QUERIES ---------- */
 @media (max-width: 1000px) {
 	#happy-birthday-villager > div {

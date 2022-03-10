@@ -5,7 +5,7 @@ import { createPinia } from "pinia";
 import router from "@/router";
 
 import { Quasar, Notify } from "quasar";
-import quasarIconSet from "quasar/icon-set/svg-fontawesome-v5";
+import quasarIconSet from "quasar/icon-set/fontawesome-v5";
 import "@quasar/extras/fontawesome-v5/fontawesome-v5.css";
 import "quasar/src/css/index.sass";
 

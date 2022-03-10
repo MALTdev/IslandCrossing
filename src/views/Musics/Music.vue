@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="text-center">
+  <q-page padding class="text-center" v-if="music">
 	
 	<section id="section-music">
 		<section id="section-music-image">
@@ -21,19 +21,29 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
+import { useQuasar } from "quasar";
+import { useMusicsStore } from "@/stores/musics"
+import type { Music } from '@/stores/musics'
+import { useRoute } from 'vue-router'
 
-const music = ref<Object>(
-	{
-		id: 1,
-		name: 'Imperial K.K',
-		image: 'https://dodo.ac/np/images/thumb/9/9a/Imperial_K.K._NH_Texture.png/256px-Imperial_K.K._NH_Texture.png',
-		audioFile: 'https://dodo.ac/np/images/1/1a/NH_Imperial_K.K._%28Aircheck%2C_Hi-Fi%29.flac',
-		genre: 'Chinese folk',
-		description: '"Imperial K.K." is a K.K. Slider song that first appears in Doubutsu no Mori. It is based on the traditional Chinese music, and derives its name from China\'s history as an imperial state prior to the downfall of the Qing dynasty in 1912. It has a gong, a few Asian gamelans, lutes, horns, and other Asian percussion.'
-	},
-)
+const route = useRoute()
+const $q = useQuasar();
+const musicsStore = useMusicsStore();
 
+const music = ref<Music>(null)
+
+onBeforeMount(async() => {
+	try {
+		music.value = await musicsStore.getMusic(route.params.id);
+		console.log(music.value)
+	} catch (error) {
+		$q.notify({
+			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",
+			type: "negative",
+		});
+	}
+})
 </script>
 
 <style scoped>

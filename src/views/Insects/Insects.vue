@@ -10,7 +10,7 @@
 	</q-card>
 
 	<section id="section-list">
-		<Insect
+		<InsectCard
 			v-for="insect in insects"
 			:key="insect.id"
 			:id="insect.id"
@@ -22,92 +22,29 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import Insect from '@/components/Cards/Insect.vue'
+import { onBeforeMount, reactive, ref } from 'vue'
+import InsectCard from '@/components/Cards/Insect.vue'
+import { useQuasar } from "quasar";
+import { useInsectsStore } from "@/stores/insects";
+import type { Insect } from "@/stores/insects";
 
-const insects = ref<Array<Object>>([
-	{
-		id: 1,
-		name: 'Agrias',
-		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
-	},
-	{
-		id: 2,
-		name: 'Agrias',
-		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
-	},
-	{
-		id: 3,
-		name: 'Agrias',
-		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
-	},
-	{
-		id: 4,
-		name: 'Agrias',
-		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
-	},
-	{
-		id: 5,
-		name: 'Agrias',
-		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
-	},
-	{
-		id: 6,
-		name: 'Agrias',
-		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
-	},
-	{
-		id: 7,
-		name: 'Agrias',
-		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
-	},
-	{
-		id: 8,
-		name: 'Agrias',
-		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
-	},
-	{
-		id: 9,
-		name: 'Agrias',
-		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
-	},
-	{
-		id: 10,
-		name: 'Agrias',
-		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
-	},
-	{
-		id: 11,
-		name: 'Agrias',
-		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
-	},
-	{
-		id: 12,
-		name: 'Agrias',
-		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
-	},
-	{
-		id: 13,
-		name: 'Agrias',
-		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
-	},
-	{
-		id: 14,
-		name: 'Agrias',
-		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
-	},
-	{
-		id: 15,
-		name: 'Agrias',
-		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
-	},
-	{
-		id: 16,
-		name: 'Agrias',
-		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
+
+const $q = useQuasar();
+const insectsStore = useInsectsStore();
+
+const insects = ref<Array<Insect>>([])
+
+onBeforeMount(async () => {
+	try {
+		insects.value = await insectsStore.getInsects();
+		console.log(insects.value)
+	} catch (error) {
+		$q.notify({
+			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",
+			type: "negative",
+		});
 	}
-])
-
+})
 </script>
 
 <style scoped>

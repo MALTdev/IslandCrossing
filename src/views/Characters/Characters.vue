@@ -10,7 +10,7 @@
 	</q-card>
 
 	<section id="section-list">
-		<Character
+		<CharacterCard
 			v-for="character in characters"
 			:key="character.id"
 			:id="character.id"
@@ -22,32 +22,29 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import Character from '@/components/Cards/Character.vue'
+import { onBeforeMount, reactive, ref } from 'vue'
+import CharacterCard from '@/components/Cards/Character.vue'
+import { useQuasar } from "quasar";
+import { useCharactersStore } from "@/stores/characters";
+import type { Character } from "@/stores/characters";
 
-const characters = ref<Array<Object>>([
-	{
-		id: 1,
-		name: 'Nook',
-		image: 'https://www.vhv.rs/dpng/d/435-4350892_animal-crossing-tom-nook-png-transparent-png.png',
-	},
-	{
-		id: 2,
-		name: 'Méli',
-		image: 'https://nsa40.casimages.com/img/2020/08/16/200816115540372263.png',
-	},
-	{
-		id: 3,
-		name: 'Mélo',
-		image: 'https://img.over-blog-kiwi.com/0/71/74/43/20200117/ob_806705_aurore.png',
-	},
-	{
-		id: 4,
-		name: 'Marie',
-		image: 'http://ekladata.com/nEB5HtzvOnrdbPm2weTMbVfGM14.png',
+
+const $q = useQuasar();
+const charactersStore = useCharactersStore();
+
+const characters = ref<Array<Character>>([])
+
+onBeforeMount(async () => {
+	try {
+		characters.value = await charactersStore.getCharacters();
+		console.log(characters.value)
+	} catch (error) {
+		$q.notify({
+			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",
+			type: "negative",
+		});
 	}
-])
-
+})
 </script>
 
 <style scoped>
