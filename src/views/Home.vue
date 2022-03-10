@@ -138,7 +138,6 @@ const itemsMenu = ref<Array<Object>>([
   {
     icon: 'fossil.png',
     text: 'Fossiles',
-    route: 'fossils',
   }
 ])
 
