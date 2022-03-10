@@ -47,8 +47,7 @@
           >
             <q-img :src="'src/assets/images/menu/' + item.icon" fit="contain"/>
           </div>
-          <span class="item-menu-text">{{ item.text }}</span>
-          <span class="item-menu-text">Bientôt !</span>
+          <span class="item-menu-text">{{ item.text }} (Bientôt !)</span>
         </div>
       </div>
     </section>
