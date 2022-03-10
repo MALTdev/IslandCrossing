@@ -47,6 +47,9 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: Home,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/login",
@@ -62,91 +65,145 @@ const router = createRouter({
       path: "/villagers",
       name: "villagers",
       component: Villagers,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/villagers/:id",
       name: "villager",
       component: Villager,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/characters",
       name: "characters",
       component: Characters,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/characters/:id",
       name: "character",
       component: Character,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/musics",
       name: "musics",
       component: Musics,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/musics/:id",
       name: "music",
       component: Music,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/insects",
       name: "insects",
       component: Insects,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/insects/:id",
       name: "insect",
       component: Insect,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/fishes",
       name: "fishes",
       component: Fishes,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/fishes/:id",
       name: "fish",
       component: Fish,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/sea-creatures",
       name: "sea-creatures",
       component: SeaCreatures,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/sea-creatures/:id",
       name: "sea-creature",
       component: SeaCreature,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/fossils",
       name: "fossils",
       component: Fossils,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/fossils/:id",
       name: "fossil",
       component: Fossil,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/profile",
       name: "profile",
       component: Profile,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/profile/update",
       name: "profile-update",
       component: ProfileUpdate,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/blog",
       name: "blog",
       component: Blog,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/blog/:slug",
       name: "blog-post",
       component: BlogPost,
+      meta: {
+        requiresAuth: true,
+      },
     },
     // route level code-splitting
     // this generates a separate chunk (About.[hash].js) for this route
