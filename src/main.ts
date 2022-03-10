@@ -2,7 +2,13 @@ import { createApp } from "vue";
 
 import { createPinia } from "pinia";
 
+import { useUserStore } from "@/stores/user";
+
 import router from "@/router";
+router.beforeEach((to) => {
+  const userStore = useUserStore()
+  if (to.meta.requiresAuth && userStore.getToken === undefined) return '/login'
+})
 
 import { Quasar, Notify } from "quasar";
 import quasarIconSet from "quasar/icon-set/fontawesome-v5";
