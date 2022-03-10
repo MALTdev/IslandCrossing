@@ -1,6 +1,5 @@
 <template>
   <q-page padding class="text-center">
-    
     <section id="section-welcome">
       <div id="section-trees-and-board">
         <div id="section-trees-left">
