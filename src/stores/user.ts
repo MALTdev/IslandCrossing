@@ -79,5 +79,9 @@ export const useUserStore = defineStore("userStore", () => {
     return user.value.api_token;
   })
 
-  return { user, login, register, logout, getToken };
+  const getUserId = computed(() => {
+    return user.value.id;
+  })
+
+  return { user, login, register, logout, getToken, getUserId };
 });

@@ -11,6 +11,7 @@ export interface Fish {
 
 export const useFishesStore = defineStore("fishesStore", () => {
   const {getToken} = useUserStore()
+  const {getUserId} = useUserStore()
 
   function getFishes() {
     return new Promise(async (resolve, reject) => {
@@ -32,5 +33,16 @@ export const useFishesStore = defineStore("fishesStore", () => {
     });
   }
 
-  return { getFishes, getFish };
+  function addFishInCollection(id: number) {
+    console.log('fish id: ' + id)
+    // getUserId
+    // @todo
+  }
+
+  function removeFishFromCollection(id: number) {
+    // getUserId
+    // @todo
+  }
+
+  return { getFishes, getFish, addFishInCollection, removeFishFromCollection };
 });

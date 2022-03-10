@@ -11,6 +11,7 @@ export interface Insect {
 
 export const useInsectsStore = defineStore("insectsStore", () => {
   const {getToken} = useUserStore()
+  const {getUserId} = useUserStore()
 
   function getInsects() {
     return new Promise(async (resolve, reject) => {
@@ -32,5 +33,16 @@ export const useInsectsStore = defineStore("insectsStore", () => {
     });
   }
 
-  return { getInsects, getInsect };
+  function addInsectInCollection(id: number) {
+    console.log('insect id: ' + id)
+    // getUserId
+    // @todo
+  }
+
+  function removeInsectFromCollection(id: number) {
+    // getUserId
+    // @todo
+  }
+
+  return { getInsects, getInsect, addInsectInCollection, removeInsectFromCollection};
 });

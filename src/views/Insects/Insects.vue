@@ -16,6 +16,7 @@
 			:id="insect.id"
 			:name="insect.name"
 			:image="insect.image"
+			:show-item-collection="true"
 		/>
 	</section>
   </q-page>
@@ -32,7 +33,90 @@ import type { Insect } from "@/stores/insects";
 const $q = useQuasar();
 const insectsStore = useInsectsStore();
 
-const insects = ref<Array<Insect>>([])
+const insects = ref<Array<Object>>([
+	{
+		id: 1,
+		name: 'Agrias',
+		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
+	},
+	{
+		id: 2,
+		name: 'Agrias',
+		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
+	},
+	{
+		id: 3,
+		name: 'Agrias',
+		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
+	},
+	{
+		id: 4,
+		name: 'Agrias',
+		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
+	},
+	{
+		id: 5,
+		name: 'Agrias',
+		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
+	},
+	{
+		id: 6,
+		name: 'Agrias',
+		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
+	},
+	{
+		id: 7,
+		name: 'Agrias',
+		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
+	},
+	{
+		id: 8,
+		name: 'Agrias',
+		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
+	},
+	{
+		id: 9,
+		name: 'Agrias',
+		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
+	},
+	{
+		id: 10,
+		name: 'Agrias',
+		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
+	},
+	{
+		id: 11,
+		name: 'Agrias',
+		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
+	},
+	{
+		id: 12,
+		name: 'Agrias',
+		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
+	},
+	{
+		id: 13,
+		name: 'Agrias',
+		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
+	},
+	{
+		id: 14,
+		name: 'Agrias',
+		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
+	},
+	{
+		id: 15,
+		name: 'Agrias',
+		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
+	},
+	{
+		id: 16,
+		name: 'Agrias',
+		image: 'https://margxt.fr/wp-content/uploads/2020/03/agrias-butterfly.png',
+	}
+])
+
+/*const insects = ref<Array<Insect>>([])
 
 onBeforeMount(async () => {
 	try {
@@ -44,7 +128,7 @@ onBeforeMount(async () => {
 			type: "negative",
 		});
 	}
-})
+})*/
 </script>
 
 <style scoped>
