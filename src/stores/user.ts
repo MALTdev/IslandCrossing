@@ -23,17 +23,17 @@ export const useUserStore = defineStore("userStore", () => {
 
   function login(form: AuthForm) {
     return new Promise(async (resolve, reject) => {
-      const xsrfToken = await (await http.get("/api/token")).data;
+      const xsrfToken = (await http.get("/api/token")).data;
 
-      const { success, api_token } = await (
+      const { success, message, api_token } = (
         await http.post("/api/login", form, {
           headers: { "XSRF-TOKEN": xsrfToken },
         })
       ).data;
 
-      if (!success) return reject();
+      if (!success) return reject(message);
 
-      const userInformations = await (
+      const userInformations = (
         await http.get(`/api/me?api_token=${api_token}`)
       ).data;
 
@@ -52,9 +52,9 @@ export const useUserStore = defineStore("userStore", () => {
 
   async function logout() {
     return new Promise(async (resolve, reject) => {
-      const xsrfToken = await (await http.get("/api/token")).data;
+      const xsrfToken = (await http.get("/api/token")).data;
 
-      const { success } = await (
+      const { success, message } = (
         await http.post(
           "/api/logout",
           {},
@@ -62,7 +62,7 @@ export const useUserStore = defineStore("userStore", () => {
         )
       ).data;
 
-      if (!success) return reject();
+      if (!success) return reject(message);
 
       user.value = {};
 
@@ -72,11 +72,11 @@ export const useUserStore = defineStore("userStore", () => {
 
   const getToken = computed(() => {
     return user.value.api_token;
-  })
+  });
 
   const getUserId = computed(() => {
     return user.value.id;
-  })
+  });
 
   return { user, login, register, logout, getToken, getUserId };
 });

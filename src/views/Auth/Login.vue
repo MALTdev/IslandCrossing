@@ -74,9 +74,9 @@ async function login() {
       message: `Bon retour parmi nous ${userStore.user.username} !`,
       type: "positive",
     });
-  } catch (error) {
+  } catch (error: any) {
     $q.notify({
-      message: "Une erreur est survenu lors de la connexion.",
+      message: error || "Une erreur est survenu lors de la connexion.",
       type: "negative",
     });
   }
