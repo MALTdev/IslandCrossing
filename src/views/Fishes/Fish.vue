@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="text-center">
+  <q-page padding class="text-center" v-if="fish">
 	
 	<h1>Poisson : {{ fish.name }}</h1>
 
@@ -10,22 +10,29 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
+import { useQuasar } from "quasar";
+import { useFishesStore } from "@/stores/fishes"
+import type { Fish } from '@/stores/fishes'
+import { useRoute } from 'vue-router'
 
-const fish = ref<Object>(
-	{
-		id: 1,
-		name: 'Carpe Koï',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/poissons/Carpe%20ko%C3%AF.png',
-		price: '4000',
-		area: 'Etang',
-		size: 'Moyenne',
-		period: 'Toute l\'année',
-		hours: '16h - 9h',
-		description: 'L\'Agrias est un insecte apparaissant dans la série Animal Crossing à partir d\'Animal Crossing: Wild World. On en trouve dans l \'air près des fleurs, durant l\'été, de juin à septembre sur l\'hémisphère nord ou d\'octobre à mars sur l\'hémisphère sud. On peut le voir voler de 8:00 à 17:00. L\'Agrias se vend pour 3 000 clochettes et mesure 42 mm en moyenne.'
-	},
-)
+const route = useRoute()
+const $q = useQuasar();
+const fishesStore = useFishesStore();
 
+const fish = ref<Fish>(null)
+
+onBeforeMount(async() => {
+	try {
+		fish.value = await fishesStore.getFish(route.params.id);
+		console.log(fish.value)
+	} catch (error) {
+		$q.notify({
+			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",
+			type: "negative",
+		});
+	}
+})
 </script>
 
 <style scoped>

@@ -10,7 +10,7 @@
 	</q-card>
 
 	<section id="section-list">
-		<Music
+		<MusicCard
 			v-for="music in musics"
 			:key="music.id"
 			:id="music.id"
@@ -22,32 +22,29 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import Music from '@/components/Cards/Music.vue'
+import { onBeforeMount, reactive, ref } from 'vue'
+import MusicCard from '@/components/Cards/Music.vue'
+import { useQuasar } from "quasar";
+import { useMusicsStore } from "@/stores/musics";
+import type { Music } from "@/stores/musics";
 
-const musics = ref<Array<Object>>([
-	{
-		id: 1,
-		name: 'Agent K.K',
-		image: 'https://dodo.ac/np/images/thumb/8/83/Agent_K.K._NH_Texture.png/256px-Agent_K.K._NH_Texture.png',
-	},
-	{
-		id: 2,
-		name: 'Bubblegum K.K',
-		image: 'https://dodo.ac/np/images/thumb/6/69/Bubblegum_K.K._NH_Texture.png/256px-Bubblegum_K.K._NH_Texture.png',
-	},
-	{
-		id: 3,
-		name: 'Hypno K.K',
-		image: 'https://dodo.ac/np/images/thumb/d/d1/Hypno_K.K._NH_Texture.png/256px-Hypno_K.K._NH_Texture.png',
-	},
-	{
-		id: 4,
-		name: 'Imperiak K.K',
-		image: 'https://dodo.ac/np/images/thumb/9/9a/Imperial_K.K._NH_Texture.png/256px-Imperial_K.K._NH_Texture.png',
+
+const $q = useQuasar();
+const musicsStore = useMusicsStore();
+
+const musics = ref<Array<Music>>([])
+
+onBeforeMount(async () => {
+	try {
+		musics.value = await musicsStore.getMusics();
+		console.log(musics.value)
+	} catch (error) {
+		$q.notify({
+			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",
+			type: "negative",
+		});
 	}
-])
-
+})
 </script>
 
 <style scoped>

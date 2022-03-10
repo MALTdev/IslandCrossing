@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="text-center">
+  <q-page padding class="text-center" v-if="character">
 	
 	<h1>{{ character.name }}</h1>
 
@@ -37,22 +37,29 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
+import { useQuasar } from "quasar";
+import { useCharactersStore } from "@/stores/characters"
+import type { Character } from '@/stores/characters'
+import { useRoute } from 'vue-router'
 
-const character = ref<Object>(
-	{
-		id: 1,
-		name: 'Rounard',
-		image: 'http://ekladata.com/nH8jwaxBSThHVSeJXNUqbtpQKmk.png',
-		birthdayDate: '18 Octobre',
-		astrologic: 'Balance',
-		species: {
-			name: 'Renard',
-		},
-		description: 'Rounard (つねきち, Tsunekichi en japonais, Redd en anglais, Ladino en espagnol, Volpolo en italien, Rainer en allemand) est un renard commerçant voire trafiquant, souvent qualifié d\'arnaqueur par les joueurs, apparaissant dans la majorité des jeux de la série Animal Crossing.'
-	},
-)
+const route = useRoute()
+const $q = useQuasar();
+const charactersStore = useCharactersStore();
 
+const character = ref<Character>(null)
+
+onBeforeMount(async() => {
+	try {
+		character.value = await charactersStore.getCharacter(route.params.id);
+		console.log(character.value)
+	} catch (error) {
+		$q.notify({
+			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",
+			type: "negative",
+		});
+	}
+})
 </script>
 
 <style scoped>

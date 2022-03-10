@@ -10,7 +10,7 @@
 	</q-card>
 
 	<section id="section-list">
-		<SeaCreature
+		<SeaCreatureCard
 			v-for="seaCreature in seaCreatures"
 			:key="seaCreature.id"
 			:id="seaCreature.id"
@@ -22,92 +22,29 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import SeaCreature from '@/components/Cards/SeaCreature.vue'
+import { onBeforeMount, reactive, ref } from 'vue'
+import SeaCreatureCard from '@/components/Cards/SeaCreature.vue'
+import { useQuasar } from "quasar";
+import { useSeaCreaturesStore } from "@/stores/seaCreatures";
+import type { SeaCreature } from "@/stores/seaCreatures";
 
-const seaCreatures = ref<Array<Object>>([
-	{
-		id: 1,
-		name: 'Crabe royal',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/fondsmarins/Crabe%20royal.png',
-	},
-	{
-		id: 2,
-		name: 'Crabe royal',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/fondsmarins/Crabe%20royal.png',
-	},
-	{
-		id: 3,
-		name: 'Crabe royal',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/fondsmarins/Crabe%20royal.png',
-	},
-	{
-		id: 4,
-		name: 'Crabe royal',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/fondsmarins/Crabe%20royal.png',
-	},
-	{
-		id: 5,
-		name: 'Crabe royal',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/fondsmarins/Crabe%20royal.png',
-	},
-	{
-		id: 6,
-		name: 'Crabe royal',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/fondsmarins/Crabe%20royal.png',
-	},
-	{
-		id: 7,
-		name: 'Crabe royal',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/fondsmarins/Crabe%20royal.png',
-	},
-	{
-		id: 8,
-		name: 'Crabe royal',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/fondsmarins/Crabe%20royal.png',
-	},
-	{
-		id: 9,
-		name: 'Crabe royal',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/fondsmarins/Crabe%20royal.png',
-	},
-	{
-		id: 10,
-		name: 'Crabe royal',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/fondsmarins/Crabe%20royal.png',
-	},
-	{
-		id: 11,
-		name: 'Crabe royal',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/fondsmarins/Crabe%20royal.png',
-	},
-	{
-		id: 12,
-		name: 'Crabe royal',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/fondsmarins/Crabe%20royal.png',
-	},
-	{
-		id: 13,
-		name: 'Crabe royal',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/fondsmarins/Crabe%20royal.png',
-	},
-	{
-		id: 14,
-		name: 'Crabe royal',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/fondsmarins/Crabe%20royal.png',
-	},
-	{
-		id: 15,
-		name: 'Crabe royal',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/fondsmarins/Crabe%20royal.png',
-	},
-	{
-		id: 16,
-		name: 'Crabe royal',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/fondsmarins/Crabe%20royal.png',
+
+const $q = useQuasar();
+const seaCreaturesStore = useSeaCreaturesStore();
+
+const seaCreatures = ref<Array<SeaCreature>>([])
+
+onBeforeMount(async () => {
+	try {
+		seaCreatures.value = await seaCreaturesStore.getSeaCreatures();
+		console.log(seaCreatures.value)
+	} catch (error) {
+		$q.notify({
+			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",
+			type: "negative",
+		});
 	}
-])
-
+})
 </script>
 
 <style scoped>

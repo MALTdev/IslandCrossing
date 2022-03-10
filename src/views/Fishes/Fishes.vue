@@ -10,7 +10,7 @@
 	</q-card>
 
 	<section id="section-list">
-		<Fish
+		<FishCard
 			v-for="fish in fishes"
 			:key="fish.id"
 			:id="fish.id"
@@ -22,92 +22,29 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import Fish from '@/components/Cards/Fish.vue'
+import { onBeforeMount, reactive, ref } from 'vue'
+import FishCard from '@/components/Cards/Fish.vue'
+import { useQuasar } from "quasar";
+import { useFishesStore } from "@/stores/fishes";
+import type { Fish } from "@/stores/fishes";
 
-const fishes = ref<Array<Object>>([
-	{
-		id: 1,
-		name: 'Carpe Koï',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/poissons/Carpe%20ko%C3%AF.png',
-	},
-	{
-		id: 2,
-		name: 'Carpe Koï',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/poissons/Carpe%20ko%C3%AF.png',
-	},
-	{
-		id: 3,
-		name: 'Carpe Koï',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/poissons/Carpe%20ko%C3%AF.png',
-	},
-	{
-		id: 4,
-		name: 'Carpe Koï',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/poissons/Carpe%20ko%C3%AF.png',
-	},
-	{
-		id: 5,
-		name: 'Carpe Koï',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/poissons/Carpe%20ko%C3%AF.png',
-	},
-	{
-		id: 6,
-		name: 'Carpe Koï',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/poissons/Carpe%20ko%C3%AF.png',
-	},
-	{
-		id: 7,
-		name: 'Carpe Koï',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/poissons/Carpe%20ko%C3%AF.png',
-	},
-	{
-		id: 8,
-		name: 'Carpe Koï',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/poissons/Carpe%20ko%C3%AF.png',
-	},
-	{
-		id: 9,
-		name: 'Carpe Koï',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/poissons/Carpe%20ko%C3%AF.png',
-	},
-	{
-		id: 10,
-		name: 'Carpe Koï',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/poissons/Carpe%20ko%C3%AF.png',
-	},
-	{
-		id: 11,
-		name: 'Carpe Koï',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/poissons/Carpe%20ko%C3%AF.png',
-	},
-	{
-		id: 12,
-		name: 'Carpe Koï',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/poissons/Carpe%20ko%C3%AF.png',
-	},
-	{
-		id: 13,
-		name: 'Carpe Koï',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/poissons/Carpe%20ko%C3%AF.png',
-	},
-	{
-		id: 14,
-		name: 'Carpe Koï',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/poissons/Carpe%20ko%C3%AF.png',
-	},
-	{
-		id: 15,
-		name: 'Carpe Koï',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/poissons/Carpe%20ko%C3%AF.png',
-	},
-	{
-		id: 16,
-		name: 'Carpe Koï',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/poissons/Carpe%20ko%C3%AF.png',
+
+const $q = useQuasar();
+const fishesStore = useFishesStore();
+
+const fishes = ref<Array<Fish>>([])
+
+onBeforeMount(async () => {
+	try {
+		fishes.value = await fishesStore.getFishes();
+		console.log(fishes.value)
+	} catch (error) {
+		$q.notify({
+			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",
+			type: "negative",
+		});
 	}
-])
-
+})
 </script>
 
 <style scoped>

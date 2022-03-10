@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="text-center">
+  <q-page padding class="text-center" v-if="seaCreature">
 	
 	<h1>Créature : {{ seaCreature.name }}</h1>
 
@@ -10,23 +10,29 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
+import { useQuasar } from "quasar";
+import { useSeaCreaturesStore } from "@/stores/seaCreatures"
+import type { SeaCreature } from '@/stores/seaCreatures'
+import { useRoute } from 'vue-router'
 
-const seaCreature = ref<Object>(
-	{
-		id: 1,
-		name: 'Crabe royal',
-		image: 'https://www.animalcrossing-online.com/new-horizons-switch/img/fondsmarins/Crabe%20royal.png',
-		price: '8000',
-		area: 'Océan',
-		size: 'Grande',
-		period: 'Novembre - Mars',
-		movement: 'Très rapide',
-		hours: 'Toute la journée',
-		description: 'L\'Agrias est un insecte apparaissant dans la série Animal Crossing à partir d\'Animal Crossing: Wild World. On en trouve dans l \'air près des fleurs, durant l\'été, de juin à septembre sur l\'hémisphère nord ou d\'octobre à mars sur l\'hémisphère sud. On peut le voir voler de 8:00 à 17:00. L\'Agrias se vend pour 3 000 clochettes et mesure 42 mm en moyenne.'
-	},
-)
+const route = useRoute()
+const $q = useQuasar();
+const seaCreaturesStore = useSeaCreaturesStore();
 
+const seaCreature = ref<SeaCreature>(null)
+
+onBeforeMount(async() => {
+	try {
+		seaCreature.value = await seaCreaturesStore.getSeaCreature(route.params.id);
+		console.log(seaCreature.value)
+	} catch (error) {
+		$q.notify({
+			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",
+			type: "negative",
+		});
+	}
+})
 </script>
 
 <style scoped>

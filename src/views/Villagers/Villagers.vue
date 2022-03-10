@@ -61,7 +61,7 @@ const filters = reactive({
   name: "",
   species: "",
   personnality: "",
-});
+});	
 
 const species = ref<Array<String>>([
 	'Pingouin',
@@ -83,7 +83,7 @@ let villagers = ref<Array<Villager>>([])
 
 onBeforeMount(async () => {
 	try {
-		villagers.value = await villagersStore.getAllVillagers();
+		villagers.value = await villagersStore.getVillagers();
 	} catch (error) {
 		$q.notify({
 			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",
