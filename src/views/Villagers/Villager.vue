@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="text-center">
+  <q-page padding class="text-center" v-if="villager">
 	
 	<h1>Villageois {{ villager.name }}</h1>
 
@@ -8,7 +8,7 @@
 			<div class="first-section">
 				<div>
 					<q-icon 
-						v-if="villager.gender === 'male'"
+						v-if="villager.gender_id === 'male'"
 						name="fas fa-mars"
 						color="blue"
 					/>
@@ -20,20 +20,17 @@
 				</div>
 				<div>
 					<span class="text-bold">Espèce : </span>
-					<span>{{ villager.species.name }}</span>
-					<div>
-						<q-img :src="villager.species.image" class="villager-image-species" fit="scale-down"/>
-					</div>
+					<span>{{ villager.species_id }}</span>
 				</div>
 				<div>
 					<span class="text-bold">Personnalité : </span>
-					<span>{{ villager.personnality }}</span>
+					<span>{{ villager.personality_id }}</span>
 				</div>
 			</div>
 
 			<div class="second-section">
 				<div class="villager-detail-image">
-					<q-img :src="villager.image" class="villager-image" fit="scale-down"/>
+					<q-img :src="villager.image_url" class="villager-image" fit="scale-down"/>
 				</div>
 
 				<span class="text-bold villager-name">{{ villager.name }}</span>
@@ -42,21 +39,21 @@
 			<div class="third-section">
 				<div>
 					<span class="text-bold">Date d'anniversaire : </span>
-					<span>{{ villager.birthdayDate }}</span>
+					<span>{{ villager.birthday_day }} {{ villager.birthday_month }}</span>
 				</div>
 				<div>
 					<span class="text-bold">Signe astrologique : </span>
-					<span>{{ villager.astrologic }}</span>
+					<span>{{ villager.sign_id }}</span>
 				</div>
 			</div>
 		</section>
 
 		<section id="section-villager-detail-bottom">
 			<div>
-				<h2>{{ villager.sentence }}</h2>
-				<div>
+				<h2>{{ villager.phrase }}</h2>
+				<!--<div>
 					<q-img :src="villager.house" class="villager-image-house" fit="scale-down"/>
-				</div>
+				</div>-->
 			</div>
 		</section>
 	</section>
@@ -64,25 +61,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
+import { useQuasar } from "quasar";
+import { useVillagersStore } from "@/stores/villagers"
+import type { Villager } from '@/stores/villagers'
+import { useRoute } from 'vue-router'
 
-const villager = ref<Object>(
-	{
-		id: 1,
-		name: 'Axel',
-		image: 'http://ekladata.com/nH8jwaxBSThHVSeJXNUqbtpQKmk.png',
-		species: {
-			name: 'Elephant',
-			image: 'https://cdn-icons-png.flaticon.com/512/194/194204.png',
-		},
-		personnality: 'Sportif',
-		sentence: 'Vive le sport muhahahaha',
-		gender: 'male',
-		birthdayDate: '20/08/1998',
-		astrologic: 'Lion',
-		house: 'https://i.ytimg.com/vi/aEk4oeZ2diY/maxresdefault.jpg',
-	},
-)
+const route = useRoute()
+const $q = useQuasar();
+const villagersStore = useVillagersStore();
+
+const villager = ref<Villager>(null)
+
+onBeforeMount(async() => {
+	try {
+		villager.value = await villagersStore.getVillager(route.params.id);
+	} catch (error) {
+		$q.notify({
+			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",
+			type: "negative",
+		});
+	}
+})
 
 </script>
 

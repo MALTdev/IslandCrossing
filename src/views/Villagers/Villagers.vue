@@ -36,20 +36,26 @@
 	</q-card>
 
 	<section id="section-list">
-		<Villager
+		<VillagerCard
 			v-for="villager in villagers"
 			:key="villager.id"
 			:id="villager.id"
 			:name="villager.name"
-			:image="villager.image"
+			:image="villager.image_url"
 		/>
 	</section>
   </q-page>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import Villager from '@/components/Cards/Villager.vue'
+import { onBeforeMount, reactive, ref } from 'vue'
+import VillagerCard from '@/components/Cards/Villager.vue'
+import { useQuasar } from "quasar";
+import { useVillagersStore } from "@/stores/villagers";
+import type { Villager } from "@/stores/villagers";
+
+const $q = useQuasar();
+const villagersStore = useVillagersStore();
 
 const filters = reactive({
   name: "",
@@ -73,28 +79,18 @@ const personnalities = ref<Array<String>>([
 	'Arrogante',
 ])
 
-const villagers = ref<Array<Object>>([
-	{
-		id: 1,
-		name: 'Axel',
-		image: 'http://ekladata.com/nH8jwaxBSThHVSeJXNUqbtpQKmk.png',
-	},
-	{
-		id: 2,
-		name: 'Monica',
-		image: 'https://nsa40.casimages.com/img/2020/08/16/200816115540372263.png',
-	},
-	{
-		id: 3,
-		name: 'Aurore',
-		image: 'https://img.over-blog-kiwi.com/0/71/74/43/20200117/ob_806705_aurore.png',
-	},
-	{
-		id: 4,
-		name: 'Reynald',
-		image: 'http://ekladata.com/nEB5HtzvOnrdbPm2weTMbVfGM14.png',
+let villagers = ref<Array<Villager>>([])
+
+onBeforeMount(async () => {
+	try {
+		villagers.value = await villagersStore.getAllVillagers();
+	} catch (error) {
+		$q.notify({
+			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",
+			type: "negative",
+		});
 	}
-])
+})
 
 </script>
 
