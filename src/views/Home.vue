@@ -47,6 +47,7 @@
           >
             <q-img :src="'src/assets/images/menu/' + item.icon" fit="contain"/>
           </div>
+          <span class="item-menu-text">{{ item.text }}</span>
           <span class="item-menu-text">Bientôt !</span>
         </div>
       </div>
@@ -128,17 +129,14 @@ const itemsMenu = ref<Array<Object>>([
   {
     icon: 'fish.png',
     text: 'Poissons',
-    route: 'fishes',
   },
   {
     icon: 'creature.png',
     text: 'Créatures',
-    route: 'sea-creatures',
   },
   {
     icon: 'fossil.png',
     text: 'Fossiles',
-    route: 'fossils',
   }
 ])
 
