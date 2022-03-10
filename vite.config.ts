@@ -17,15 +17,9 @@ export default defineConfig({
   ],
   server: {
     proxy: {
-      "/auth": {
-        target: "http://islandcrossing.anaelbonnafous.fr",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/auth/, ""),
-      },
       "/api": {
-        target: "http://islandcrossing.anaelbonnafous.fr/api",
+        target: "https://islandcrossing.anaelbonnafous.fr",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },

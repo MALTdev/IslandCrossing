@@ -1,7 +1,7 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import { useLocalStorage } from "@vueuse/core";
-import axios from "axios";
+import http from "@/plugins/axios";
 
 export interface User {
   id?: number;
@@ -23,26 +23,21 @@ export const useUserStore = defineStore("userStore", () => {
 
   function login(form: AuthForm) {
     return new Promise(async (resolve, reject) => {
-      const xsrfToken = await (await axios.get("/auth/token")).data;
+      const xsrfToken = await (await http.get("/api/token")).data;
 
-      const { success } = await (
-        await axios.post("/auth/login", form, {
+      const { success, api_token } = await (
+        await http.post("/api/login", form, {
           headers: { "XSRF-TOKEN": xsrfToken },
         })
       ).data;
 
       if (!success) return reject();
 
-      const { id, api_token } = await (
-        await axios.get("/auth/user_token")
-      ).data;
-
       const userInformations = await (
-        await axios.get(`/api/users/${id}?api_token=${api_token}`)
+        await http.get(`/api/me?api_token=${api_token}`)
       ).data;
 
       user.value = {
-        id,
         api_token,
         ...userInformations,
       };
@@ -57,11 +52,11 @@ export const useUserStore = defineStore("userStore", () => {
 
   async function logout() {
     return new Promise(async (resolve, reject) => {
-      const xsrfToken = await (await axios.get("/auth/token")).data;
+      const xsrfToken = await (await http.get("/api/token")).data;
 
       const { success } = await (
-        await axios.post(
-          "/auth/logout",
+        await http.post(
+          "/api/logout",
           {},
           { headers: { "XSRF-TOKEN": xsrfToken } }
         )
