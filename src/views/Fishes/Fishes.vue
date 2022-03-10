@@ -16,6 +16,7 @@
 			:id="fish.id"
 			:name="fish.name"
 			:image="fish.image"
+			:show-item-collection="true"
 		/>
 	</section>
   </q-page>

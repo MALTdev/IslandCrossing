@@ -16,6 +16,7 @@
 			:id="insect.id"
 			:name="insect.name"
 			:image="insect.image"
+			:show-item-collection="true"
 		/>
 	</section>
   </q-page>
