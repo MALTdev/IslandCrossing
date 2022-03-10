@@ -4,10 +4,9 @@
       <q-btn
         :to="{ name: 'blog' }"
         color="primary"
-        icon="fas fa-chevron-left"
+        icon="fas fa-caret-square-left"
         fab
       />
-      <q-btn color="secondary" icon="fas fa-share" fab />
     </div>
     <h1 class="text-white">Post {{ route.params.slug }}</h1>
   </q-parallax>
