@@ -8,8 +8,8 @@ describe("Insect Card", () => {
     // creates a fresh pinia and make it active so it's automatically picked
     // up by any useStore() call without having to pass it to it:
     // `useStore(pinia)`
-    setActivePinia(createPinia())
-  })
+    setActivePinia(createPinia());
+  });
   
   test("Le prop showItemCollection set à true affiche l'icône pour ajouter l'insecte à sa collection", () => {
     const wrapper = mount(InsectCard, {
@@ -20,8 +20,11 @@ describe("Insect Card", () => {
         showItemCollection: true,
       }
     });
+
     expect(wrapper.find('.insect-leaf').isVisible()).toBe(true);
+    expect(wrapper.find('.insect-name').text()).toBe('Agrias');
   });
+
   test("Le prop showItemCollection set à false n'affiche pas l'icône pour ajouter l'insecte à sa collection", () => {
     const wrapper = mount(InsectCard, {
       props: {
@@ -32,5 +35,6 @@ describe("Insect Card", () => {
       }
     });
     expect(wrapper.find('.insect-leaf').exists()).toBe(false);
+    expect(wrapper.find('.insect-name').text()).toBe('Agrias');
   });
 });

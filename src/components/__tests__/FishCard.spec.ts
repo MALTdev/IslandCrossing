@@ -8,8 +8,8 @@ describe("Fish Card", () => {
     // creates a fresh pinia and make it active so it's automatically picked
     // up by any useStore() call without having to pass it to it:
     // `useStore(pinia)`
-    setActivePinia(createPinia())
-  })
+    setActivePinia(createPinia());
+  });
   
   test("Le prop showItemCollection set à true affiche l'icône pour ajouter le poisson à sa collection", () => {
     const wrapper = mount(FishCard, {
@@ -21,7 +21,9 @@ describe("Fish Card", () => {
       }
     });
     expect(wrapper.find('.fish-leaf').isVisible()).toBe(true);
+	expect(wrapper.find('.fish-name').text()).toBe('Napoléon');
   });
+
   test("Le prop showItemCollection set à false n'affiche pas l'icône pour ajouter le poisson à sa collection", () => {
     const wrapper = mount(FishCard, {
       props: {
@@ -32,5 +34,6 @@ describe("Fish Card", () => {
       }
     });
     expect(wrapper.find('.fish-leaf').exists()).toBe(false);
+	expect(wrapper.find('.fish-name').text()).toBe('Napoléon');
   });
 });
