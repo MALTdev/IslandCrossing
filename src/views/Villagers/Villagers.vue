@@ -28,7 +28,7 @@
             />
 			<q-select
               v-model="filters.personnality"
-              label="Nom de l'habitant"
+              label="Personnalité de l'habitant"
 			  :options="personnalities"
 			  class="field"
             />
