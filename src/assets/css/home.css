@@ -58,7 +58,7 @@
 /* ---------- IMAGE BOTTOM ---------- */
 #section-welcome::after {
 	content: "";
-	background-image: url('@/assets/images/patterns/herbes.jpg');
+	background-image: url('/images/patterns/herbes.jpg');
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -167,7 +167,7 @@
 
 #section-happy-birthday::after {
 	content: "";
-	background-image: url('@/assets/images/confetti.png');
+	background-image: url('/images/confetti.png');
 	background-repeat: repeat;
 	position: absolute;
 	right: 0;
@@ -191,7 +191,7 @@
 
 #happy-birthday-villager-image {
 	max-height: 350px;
-	background-image: url('@/assets/images/confetti.png');
+	background-image: url('/images/confetti.png');
 }
 
 #happy-birthday-villager-card {
@@ -251,7 +251,7 @@
  ***********************
  */
  #section-last-publications {
-	background-image: url('@/assets/images/patterns/herbes.jpg');
+	background-image: url('/images/patterns/herbes.jpg');
 	background-repeat: repeat;
 	padding: 140px 0 0 0;
 	overflow: hidden;
@@ -259,7 +259,7 @@
 
  #section-last-publications::before {
 	content: "";
-	background-image: url('@/assets/images/apple_border_top.png');
+	background-image: url('/images/apple_border_top.png');
 	background-repeat: no-repeat;
 	position: absolute;
 	top: -100px;
