@@ -3,22 +3,22 @@
     <section id="section-welcome">
       <div id="section-trees-and-board">
         <div id="section-trees-left">
-          <q-img class="trees" src="@/assets/images/arbre_ete.png"/>
-          <q-img class="trees" src="@/assets/images/arbre_automne.png"/>
+          <q-img class="trees" src="/images/arbre_ete.png"/>
+          <q-img class="trees" src="/images/arbre_automne.png"/>
         </div>
 
         <div id="section-board">
-          <q-img id="board" src="@/assets/images/tableau.png"/>
+          <q-img id="board" src="/images/tableau.png"/>
         </div>
 
         <div id="section-trees-right">
-          <q-img class="trees" src="@/assets/images/arbre_printemps.png"/>
-          <q-img class="trees" src="@/assets/images/arbre_ete.png"/>
+          <q-img class="trees" src="/images/arbre_printemps.png"/>
+          <q-img class="trees" src="/images/arbre_ete.png"/>
         </div>
       </div>
 
       <div id="section-absolute">
-        <q-img id="balloon" src="@/assets/images/cadeau_ballon.png"/>
+        <q-img id="balloon" src="/images/cadeau_ballon.png"/>
       </div>
     </section>
 
@@ -36,7 +36,7 @@
           <div
             class="item-menu-rounded"
           >
-            <q-img :src="'src/assets/images/menu/' + item.icon" fit="contain"/>
+            <q-img :src="'/images/menu/' + item.icon" fit="contain"/>
           </div>
           <span class="item-menu-text">{{ item.text }}</span>
         </router-link>
@@ -45,7 +45,7 @@
           <div
             class="item-menu-rounded disabled grayscale"
           >
-            <q-img :src="'src/assets/images/menu/' + item.icon" fit="contain"/>
+            <q-img :src="'/images/menu/' + item.icon" fit="contain"/>
           </div>
           <span class="item-menu-text">{{ item.text }} (Bientôt !)</span>
         </div>
@@ -88,8 +88,8 @@
           :key="publication.id"
         >
           <div class="publication-image">
-            <q-img v-if="publication.image" alt="Bannière de la publication" :src="'src/assets/images/publications/' + publication.image"/>
-            <q-img v-else alt="Bannière de la publication" src="@/assets/images/publications/default_banner.png"/>
+            <q-img v-if="publication.image" alt="Bannière de la publication" :src="'/images/publications/' + publication.image"/>
+            <q-img v-else alt="Bannière de la publication" src="/images/publications/default_banner.png"/>
           </div>
           <span class="publication-title">{{ publication.title }}</span>
         </div>

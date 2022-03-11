@@ -7,13 +7,13 @@
 }
 
 .insect-section-image {
-	background-image: url('@/assets/images/patterns/herbes.jpg');
+	background-image: url('/images/patterns/herbes.jpg');
 	position: relative;
 }
 
 .insect-leaf {
 	position: absolute;
-	background-image: url('@/assets/images/leaf.png');
+	background-image: url('/images/leaf.png');
 	background-size: contain;
     background-position: center;
     background-repeat: no-repeat;

@@ -7,7 +7,7 @@
 }
 
 .sea-creature-section-image {
-	background-image: url('@/assets/images/patterns/deep_water.jpg');
+	background-image: url('/images/patterns/deep_water.jpg');
 }
 
 .sea-creature-image {

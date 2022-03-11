@@ -7,7 +7,7 @@
 }
 
 .fish-section-image {
-	background-image: url('@/assets/images/patterns/water.jpeg');
+	background-image: url('/images/patterns/water.jpeg');
 	position: relative;
 }
 
@@ -17,7 +17,7 @@
 
 .fish-leaf {
 	position: absolute;
-	background-image: url('@/assets/images/leaf.png');
+	background-image: url('/images/leaf.png');
 	background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
