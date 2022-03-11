@@ -16,6 +16,7 @@
 			:id="fish.id"
 			:name="fish.name"
 			:image="fish.image_url"
+			:has-fish="fish.hasFish"
 			:show-item-collection="true"
 		/>
 	</section>

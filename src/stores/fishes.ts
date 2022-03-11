@@ -33,10 +33,10 @@ export const useFishesStore = defineStore("fishesStore", () => {
     });
   }
 
-  function getFishInCollection(idFish: number) {
+  function getFishesUser() {
     return new Promise(async (resolve, reject) => {
       const fish = await (
-        await axios.get(`/api/has_fish?api_token=${getToken}&user_id=${getUserId}&fish_id=${idFish}`)
+        await axios.get(`/api/user-fishes?api_token=${getToken}&user_id=${getUserId}`)
       ).data;
 
       return resolve(fish);
@@ -44,14 +44,24 @@ export const useFishesStore = defineStore("fishesStore", () => {
   }
 
   function addFishInCollection(idFish: number) {
-    // getUserId
-    // @todo
+    return new Promise(async (resolve, reject) => {
+      const fish = await (
+        await axios.post(`/api/has-fish-user?api_token=${getToken}&user_id=${getUserId}&fish_id=${idFish}`)
+      ).data;
+
+      return resolve(fish);
+    });
   }
 
   function removeFishFromCollection(idFish: number) {
-    // getUserId
-    // @todo
+    return new Promise(async (resolve, reject) => {
+      const fish = await (
+        await axios.delete(`/api/has-fish-user-remove?api_token=${getToken}&user_id=${getUserId}&fish_id=${idFish}`)
+      ).data;
+
+      return resolve(fish);
+    });
   }
 
-  return { getFishes, getFish, getFishInCollection, addFishInCollection, removeFishFromCollection };
+  return { getFishes, getFish, getFishesUser, addFishInCollection, removeFishFromCollection };
 });
