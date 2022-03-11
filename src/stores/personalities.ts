@@ -24,5 +24,15 @@ export const usePersonalitiesStore = defineStore("personalitiesStore", () => {
     });
   }
 
-  return { getPersonalities };
+  function getPersonalitiesNames() {
+    return new Promise(async (resolve, reject) => {
+      const personalities = await (
+        await axios.get(`/api/personalities/getnames?api_token=${getToken}`)
+      ).data;
+
+      return resolve(personalities);
+    });
+  }
+
+  return { getPersonalities, getPersonalitiesNames };
 });

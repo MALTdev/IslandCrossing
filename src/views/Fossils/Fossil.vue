@@ -25,7 +25,6 @@ const fossil = ref<Fossil>(null)
 onBeforeMount(async() => {
 	try {
 		fossil.value = await fossilsStore.getFossil(route.params.id);
-		console.log(fossil.value)
 	} catch (error) {
 		$q.notify({
 			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",

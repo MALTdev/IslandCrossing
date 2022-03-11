@@ -37,7 +37,6 @@ const fossils = ref<Array<Fossil>>([])
 onBeforeMount(async () => {
 	try {
 		fossils.value = await fossilsStore.getFossils();
-		console.log(fossils.value)
 	} catch (error) {
 		$q.notify({
 			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",

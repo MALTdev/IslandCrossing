@@ -15,7 +15,7 @@
 			:key="fish.id"
 			:id="fish.id"
 			:name="fish.name"
-			:image="fish.image"
+			:image="fish.image_url"
 			:show-item-collection="true"
 		/>
 	</section>
@@ -38,7 +38,6 @@ const fishes = ref<Array<Fish>>([])
 onBeforeMount(async () => {
 	try {
 		fishes.value = await fishesStore.getFishes();
-		console.log(fishes.value)
 	} catch (error) {
 		$q.notify({
 			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",

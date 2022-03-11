@@ -15,7 +15,7 @@
 			:key="seaCreature.id"
 			:id="seaCreature.id"
 			:name="seaCreature.name"
-			:image="seaCreature.image"
+			:image="seaCreature.image_url"
 		/>
 	</section>
   </q-page>
@@ -37,7 +37,6 @@ const seaCreatures = ref<Array<SeaCreature>>([])
 onBeforeMount(async () => {
 	try {
 		seaCreatures.value = await seaCreaturesStore.getSeaCreatures();
-		console.log(seaCreatures.value)
 	} catch (error) {
 		$q.notify({
 			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",

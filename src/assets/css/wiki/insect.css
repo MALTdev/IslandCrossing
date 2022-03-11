@@ -9,8 +9,8 @@
 	width: 40%;
 }
 
-#insect-image {
-	max-height: 250px;
+.insect-image {
+	max-height: 200px;
 }
 
 #section-insect-informations {

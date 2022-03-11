@@ -34,7 +34,6 @@ export const useInsectsStore = defineStore("insectsStore", () => {
   }
 
   function addInsectInCollection(id: number) {
-    console.log('insect id: ' + id)
     // getUserId
     // @todo
   }

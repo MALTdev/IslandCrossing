@@ -34,8 +34,14 @@ async function goToDetailFish(id: Number) {
   router.push({ name: "fish", params: { id: id } });
 }
 
+function isInCollection (id: Number) {
+	const resp = fishesStore.getFishInCollection(id)
+	console.log(resp)
+}
+
 function addOrRemoveFromCollection (id: Number) {
-	fishesStore.addFishInCollection(id)
+	//this.isInCollection(id)
+	//fishesStore.addFishInCollection(id)
 	//fishesStore.removeFishFromCollection(id)
 }
 

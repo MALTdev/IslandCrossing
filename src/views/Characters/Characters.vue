@@ -15,7 +15,7 @@
 			:key="character.id"
 			:id="character.id"
 			:name="character.name"
-			:image="character.image"
+			:image="character.photoImage"
 		/>
 	</section>
   </q-page>
@@ -37,7 +37,6 @@ const characters = ref<Array<Character>>([])
 onBeforeMount(async () => {
 	try {
 		characters.value = await charactersStore.getCharacters();
-		console.log(characters.value)
 	} catch (error) {
 		$q.notify({
 			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",

@@ -9,13 +9,13 @@
 		</q-card-section>
 	</q-card>
 
-	<section id="section-list">
+	<section id="section-list" class="section-list-villagers">
 		<MusicCard
 			v-for="music in musics"
 			:key="music.id"
 			:id="music.id"
 			:name="music.name"
-			:image="music.image"
+			:image="music.image_url"
 		/>
 	</section>
   </q-page>
@@ -37,7 +37,6 @@ const musics = ref<Array<Music>>([])
 onBeforeMount(async () => {
 	try {
 		musics.value = await musicsStore.getMusics();
-		console.log(musics.value)
 	} catch (error) {
 		$q.notify({
 			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",

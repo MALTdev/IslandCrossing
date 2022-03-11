@@ -52,12 +52,17 @@
       </div>
     </section>
 
-    <section id="section-happy-birthday" v-if="birthdays">
+    <section id="section-happy-birthday" v-if="villagersBirthdays && villagersBirthdays.length > 0">
       <h2>Les anniversaires des habitants, le {{ dateNow }}</h2>
       <div id="happy-birthday-villager">
           <div id="happy-birthday-villager-card-and-icons">
-            <q-card id="happy-birthday-villager-card">{{ birthdays[birthdaySelected].name }} fête son anniversaire aujourd'hui !</q-card>
-            <div id="happy-birthday-village-change-villager" v-if="birthdays.length > 1">
+            <q-card
+              id="happy-birthday-villager-card"
+              @click="goToFicheVillager(villagersBirthdays[birthdaySelected].id)"
+            >
+              {{ villagersBirthdays[birthdaySelected].name }} fête son anniversaire aujourd'hui !
+            </q-card>
+            <div id="happy-birthday-village-change-villager" v-if="villagersBirthdays.length > 1">
               <q-icon
                 class="icon-homepage"
                 name="fas fa-caret-square-left"
@@ -70,7 +75,7 @@
               />
             </div>
           </div>
-          <q-img id="happy-birthday-villager-image" :src="birthdays[birthdaySelected].url" fit="contain"/>
+          <q-img id="happy-birthday-villager-image" :src="villagersBirthdays[birthdaySelected].image_url" fit="contain"/>
       </div>
     </section>
 
@@ -95,10 +100,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { onBeforeMount, computed, ref } from 'vue'
+import { useVillagersStore } from "@/stores/villagers";
+import { useQuasar } from "quasar";
+import type { Villager } from "@/stores/villagers";
 import moment from 'moment'
 
+const $q = useQuasar();
 const dateNow = ref<String>(moment().format('DD/MM'))
+const villagersStore = useVillagersStore();
+import router from "@/router";
 
 const itemsMenu = ref<Array<Object>>([
   {
@@ -158,37 +169,40 @@ const publications = ref<Array<Object>>([
 
 const birthdaySelected = ref<number>(0)
 
-const birthdays = ref<Array<Object>>([
-  {
-    url: 'http://ekladata.com/0sERZpktjWhwS4xcIg8nk3MmiH8.png',
-    name: 'George',
-  },
-  {
-    url: 'https://animalcrossingwiki.de/_media/nachbarn/daniel/daniel_nl.png',
-    name: 'Daniel',
-  },
-  {
-    url: 'https://www.pngkit.com/png/full/243-2438030_new-leaf-who-is-your-favorite-rabbit-villager.png',
-    name: 'Carmen',
-  }
-])
+const villagersBirthdays = ref<Array<Villager>>([])
 
 function getPreviousBirthday() {
   if (this.birthdaySelected !== 0) {
       this.birthdaySelected--
       return
   }
-  this.birthdaySelected = this.birthdays.length - 1
+  this.birthdaySelected = this.villagersBirthdays.length - 1
 }
 
 function getNextBirthday() {
-  if (this.birthdaySelected === this.birthdays.length - 1) {
+  console.log(this.bir)
+  if (this.birthdaySelected === this.villagersBirthdays.length - 1) {
       this.birthdaySelected = 0
       return
   }
   this.birthdaySelected++
 }
 
+function goToFicheVillager(idVillager: number) {
+  router.push({ name: "villager", params: { id: idVillager } });
+}
+
+onBeforeMount(async () => {
+	try {
+		villagersBirthdays.value = await villagersStore.getVillagersBirthdays();
+    console.log(villagersBirthdays)
+	} catch (error) {
+		$q.notify({
+			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",
+			type: "negative",
+		});
+	}
+})
 </script>
 
 <style scoped>

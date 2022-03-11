@@ -4,8 +4,11 @@
 	<h1>Insecte : {{ insect.name }}</h1>
 
     <section id="section-insect-detail">
-		Prix de vente : {{ insect.price }} clochettes
+		<q-img class="insect-image" :src="insect.image_url" fit="scale-down"/>
 	</section>
+	<p><span class="test-bold">Phrase lors de la capture :</span> {{ insect.catchphrase }}</p>
+	<p><span class="test-bold">Lieu(x) pour l'attraper :</span> {{ insect.location }}</p>
+	<p><span class="test-bold">Prix de vente :</span> {{ insect.sell_nook }} clochettes</p>
   </q-page>
 </template>
 
@@ -25,7 +28,6 @@ const insect = ref<Insect>(null)
 onBeforeMount(async() => {
 	try {
 		insect.value = await insectsStore.getInsect(route.params.id);
-		console.log(insect.value)
 	} catch (error) {
 		$q.notify({
 			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",
