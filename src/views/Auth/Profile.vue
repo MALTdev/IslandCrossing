@@ -10,16 +10,16 @@
           <div class="float-right">
             <img src="@/assets/images/menu/villager.png" alt="">
             <div class="bg-brown pseudo-profile">
-              Coucou {{ user.username }}
+              {{ user.username }}
             </div>
           </div>
         </q-card-section>
         <q-card-section class="text-justify">
-          J’adore faire “Aouuuuuuh” le matin dès 6h du matin après une bonne séance de sport :
-          rien de mieux qu’un bon footing près de la plage, loin de cette méchante Éloïse.
+          <p v-if="user.description">{{ user.description}}</p>
+          <p v-else>Aucune description.</p>
         </q-card-section>
-        <q-card-section>
-          <div class="text-left"><strong>Série préféré : </strong> Moderne </div>
+        <q-card-section v-if="user.setFurniture">
+          <div class="text-left"><strong>Série préféré : </strong> {{user.setFurniture}} </div>
         </q-card-section>
       </q-card>
       <div class="text-center col-4 console-reaction q-mt-md q-mb-lg">
@@ -27,8 +27,8 @@
           <div class="q-mr-lg invisible platform-code">{{ platform.code }}</div>
           <q-btn class="q-mr-lg" color="secondary" :label="platform.name"></q-btn>
         </div>
-        <div class="reaction">
-          <strong>Réaction la plus utilisée :  </strong>
+        <div class="reaction" v-show="false">
+          <strong>Réaction la plus utilisée : </strong>
         </div>
       </div>
       <div class="text-center col-4 q-ma-lg-sm">
