@@ -1,7 +1,7 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import { useLocalStorage } from "@vueuse/core";
-import axios from "axios";
+import http from "@/plugins/axios";
 import { useUserStore } from "@/stores/user"
 import type { User } from "@/stores/user"
 
@@ -16,7 +16,7 @@ export const useInsectsStore = defineStore("insectsStore", () => {
   function getInsects() {
     return new Promise(async (resolve, reject) => {
       const insects = await (
-        await axios.get(`/api/insects?api_token=${getToken}`)
+        await http.get(`/api/insects?api_token=${getToken}`)
       ).data;
 
       return resolve(insects);
@@ -26,7 +26,7 @@ export const useInsectsStore = defineStore("insectsStore", () => {
   function getInsect(id: number) {
     return new Promise(async (resolve, reject) => {
       const insect = await (
-        await axios.get(`/api/insects/${id}?api_token=${getToken}`)
+        await http.get(`/api/insects/${id}?api_token=${getToken}`)
       ).data;
 
       return resolve(insect);
@@ -36,7 +36,7 @@ export const useInsectsStore = defineStore("insectsStore", () => {
   function getInsectsUser() {
     return new Promise(async (resolve, reject) => {
       const insects = await (
-        await axios.get(`/api/user-insects?api_token=${getToken}&user_id=${getUserId}`)
+        await http.get(`/api/user-insects?api_token=${getToken}&user_id=${getUserId}`)
       ).data;
 
       return resolve(insects);
@@ -46,7 +46,7 @@ export const useInsectsStore = defineStore("insectsStore", () => {
   function addInsectInCollection(idInsect: number) {
     return new Promise(async (resolve, reject) => {
       const insect = await (
-        await axios.post(`/api/has-insect-user?api_token=${getToken}&user_id=${getUserId}&insect_id=${idInsect}`)
+        await http.post(`/api/has-insect-user?api_token=${getToken}&user_id=${getUserId}&insect_id=${idInsect}`)
       ).data;
 
       return resolve(insect);
@@ -56,7 +56,7 @@ export const useInsectsStore = defineStore("insectsStore", () => {
   function removeInsectFromCollection(idInsect: number) {
     return new Promise(async (resolve, reject) => {
       const insect = await (
-        await axios.delete(`/api/has-insects-user-remove?api_token=${getToken}&user_id=${getUserId}&insect_id=${idInsect}`)
+        await http.delete(`/api/has-insects-user-remove?api_token=${getToken}&user_id=${getUserId}&insect_id=${idInsect}`)
       ).data;
 
       return resolve(insect);

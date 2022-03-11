@@ -1,7 +1,7 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import { useLocalStorage } from "@vueuse/core";
-import axios from "axios";
+import http from "@/plugins/axios";
 import { useUserStore } from "@/stores/user"
 import type { User } from "@/stores/user"
 
@@ -17,7 +17,7 @@ export const useSpeciesStore = defineStore("speciesStore", () => {
   function getSpecies() {
     return new Promise(async (resolve, reject) => {
       const species = await (
-        await axios.get(`/api/species?api_token=${getToken}`)
+        await http.get(`/api/species?api_token=${getToken}`)
       ).data;
 
       return resolve(species);
@@ -27,7 +27,7 @@ export const useSpeciesStore = defineStore("speciesStore", () => {
   function getSpeciesNames() {
     return new Promise(async (resolve, reject) => {
       const species = await (
-        await axios.get(`/api/species/getnames?api_token=${getToken}`)
+        await http.get(`/api/species/getnames?api_token=${getToken}`)
       ).data;
 
       return resolve(species);

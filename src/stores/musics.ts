@@ -1,7 +1,7 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import { useLocalStorage } from "@vueuse/core";
-import axios from "axios";
+import http from "@/plugins/axios";
 import { useUserStore } from "@/stores/user"
 import type { User } from "@/stores/user"
 
@@ -15,7 +15,7 @@ export const useMusicsStore = defineStore("musicsStore", () => {
   function getMusics() {
     return new Promise(async (resolve, reject) => {
       const musics = await (
-        await axios.get(`/api/musics?api_token=${getToken}`)
+        await http.get(`/api/musics?api_token=${getToken}`)
       ).data;
 
       return resolve(musics);
@@ -25,7 +25,7 @@ export const useMusicsStore = defineStore("musicsStore", () => {
   function getMusic(id: number) {
     return new Promise(async (resolve, reject) => {
       const music = await (
-        await axios.get(`/api/musics/${id}?api_token=${getToken}`)
+        await http.get(`/api/musics/${id}?api_token=${getToken}`)
       ).data;
 
       return resolve(music);

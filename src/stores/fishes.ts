@@ -1,7 +1,7 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import { useLocalStorage } from "@vueuse/core";
-import axios from "axios";
+import http from "@/plugins/axios";
 import { useUserStore } from "@/stores/user"
 import type { User } from "@/stores/user"
 
@@ -16,7 +16,7 @@ export const useFishesStore = defineStore("fishesStore", () => {
   function getFishes() {
     return new Promise(async (resolve, reject) => {
       const fishes = await (
-        await axios.get(`/api/fishes?api_token=${getToken}`)
+        await http.get(`/api/fishes?api_token=${getToken}`)
       ).data;
 
       return resolve(fishes);
@@ -26,7 +26,7 @@ export const useFishesStore = defineStore("fishesStore", () => {
   function getFish(id: number) {
     return new Promise(async (resolve, reject) => {
       const fish = await (
-        await axios.get(`/api/fishes/${id}?api_token=${getToken}`)
+        await http.get(`/api/fishes/${id}?api_token=${getToken}`)
       ).data;
 
       return resolve(fish);
@@ -36,7 +36,7 @@ export const useFishesStore = defineStore("fishesStore", () => {
   function getFishesUser() {
     return new Promise(async (resolve, reject) => {
       const fish = await (
-        await axios.get(`/api/user-fishes?api_token=${getToken}&user_id=${getUserId}`)
+        await http.get(`/api/user-fishes?api_token=${getToken}&user_id=${getUserId}`)
       ).data;
 
       return resolve(fish);
@@ -46,7 +46,7 @@ export const useFishesStore = defineStore("fishesStore", () => {
   function addFishInCollection(idFish: number) {
     return new Promise(async (resolve, reject) => {
       const fish = await (
-        await axios.post(`/api/has-fish-user?api_token=${getToken}&user_id=${getUserId}&fish_id=${idFish}`)
+        await http.post(`/api/has-fish-user?api_token=${getToken}&user_id=${getUserId}&fish_id=${idFish}`)
       ).data;
 
       return resolve(fish);
@@ -56,7 +56,7 @@ export const useFishesStore = defineStore("fishesStore", () => {
   function removeFishFromCollection(idFish: number) {
     return new Promise(async (resolve, reject) => {
       const fish = await (
-        await axios.delete(`/api/has-fish-user-remove?api_token=${getToken}&user_id=${getUserId}&fish_id=${idFish}`)
+        await http.delete(`/api/has-fish-user-remove?api_token=${getToken}&user_id=${getUserId}&fish_id=${idFish}`)
       ).data;
 
       return resolve(fish);

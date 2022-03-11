@@ -1,7 +1,7 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import { useLocalStorage } from "@vueuse/core";
-import axios from "axios";
+import http from "@/plugins/axios";
 import { useUserStore } from "@/stores/user"
 import type { User } from "@/stores/user"
 
@@ -32,7 +32,7 @@ export const useVillagersStore = defineStore("villagersStore", () => {
   function getVillagers() {
     return new Promise(async (resolve, reject) => {
       const villagers = await (
-        await axios.get(`/api/villagers?api_token=${getToken}`)
+        await http.get(`/api/villagers?api_token=${getToken}`)
       ).data;
 
       return resolve(villagers);
@@ -42,7 +42,7 @@ export const useVillagersStore = defineStore("villagersStore", () => {
   function getNamesAndCodeVillagers() {
     return new Promise(async (resolve, reject) => {
       const namesVillagers = await (
-        await axios.get(`/api/villagers/getnames?api_token=${getToken}`)
+        await http.get(`/api/villagers/getnames?api_token=${getToken}`)
       ).data;
 
       return resolve(namesVillagers);
@@ -53,7 +53,7 @@ export const useVillagersStore = defineStore("villagersStore", () => {
   function getVillagersFiltered(params: string) {
 	return new Promise(async (resolve, reject) => {
 		const villagers = await (
-		  await axios.get(`/api/villagers/search?api_token=${getToken}${params}`)
+		  await http.get(`/api/villagers/search?api_token=${getToken}${params}`)
 		).data;
   
 		return resolve(villagers);
@@ -63,7 +63,7 @@ export const useVillagersStore = defineStore("villagersStore", () => {
   function getVillager(id: number) {
     return new Promise(async (resolve, reject) => {
       const villager = await (
-        await axios.get(`/api/villagers/${id}?api_token=${getToken}`)
+        await http.get(`/api/villagers/${id}?api_token=${getToken}`)
       ).data;
 
       return resolve(villager);
@@ -73,7 +73,7 @@ export const useVillagersStore = defineStore("villagersStore", () => {
   function getVillagersBirthdays() {
     return new Promise(async (resolve, reject) => {
       const villager = await (
-        await axios.get(`/api/villagers-anniversary-today?api_token=${getToken}`)
+        await http.get(`/api/villagers-anniversary-today?api_token=${getToken}`)
       ).data;
 
       return resolve(villager);
