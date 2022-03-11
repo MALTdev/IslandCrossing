@@ -17,6 +17,7 @@
 			:name="insect.name"
 			:image="insect.image_url"
 			:show-item-collection="true"
+			:has-insect="insect.hasInsect"
 		/>
 	</section>
   </q-page>

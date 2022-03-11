@@ -33,16 +33,22 @@ main {
 .img-insect-swiper {
   background-image: url("/images/patterns/herbes.jpg");
   border-radius: 20px;
+  margin: 0 auto;
+  max-height: 150px;
 }
 
 .img-fish-swiper {
   background-image: url("/images/patterns/water.jpeg");
   border-radius: 20px;
+  margin: 0 auto;
+  max-height: 150px;
 }
 
 .img-creatures-swiper {
   background-image: url("/images/patterns/deep_water.jpg");
   border-radius: 20px;
+  margin: 0;
+  max-height: 150px;
 }
 
 .platform:hover .platform-code {

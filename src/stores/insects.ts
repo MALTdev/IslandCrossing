@@ -33,15 +33,35 @@ export const useInsectsStore = defineStore("insectsStore", () => {
     });
   }
 
-  function addInsectInCollection(id: number) {
-    // getUserId
-    // @todo
+  function getInsectsUser() {
+    return new Promise(async (resolve, reject) => {
+      const insects = await (
+        await axios.get(`/api/user-insects?api_token=${getToken}&user_id=${getUserId}`)
+      ).data;
+
+      return resolve(insects);
+    });
   }
 
-  function removeInsectFromCollection(id: number) {
-    // getUserId
-    // @todo
+  function addInsectInCollection(idInsect: number) {
+    return new Promise(async (resolve, reject) => {
+      const insect = await (
+        await axios.post(`/api/has-insect-user?api_token=${getToken}&user_id=${getUserId}&insect_id=${idInsect}`)
+      ).data;
+
+      return resolve(insect);
+    });
   }
 
-  return { getInsects, getInsect, addInsectInCollection, removeInsectFromCollection};
+  function removeInsectFromCollection(idInsect: number) {
+    return new Promise(async (resolve, reject) => {
+      const insect = await (
+        await axios.delete(`/api/has-insects-user-remove?api_token=${getToken}&user_id=${getUserId}&insect_id=${idInsect}`)
+      ).data;
+
+      return resolve(insect);
+    });
+  }
+
+  return { getInsects, getInsect, getInsectsUser, addInsectInCollection, removeInsectFromCollection};
 });

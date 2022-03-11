@@ -7,7 +7,7 @@
 			<q-img :src="image" class="fish-image" fit="scale-down"/>
 			<div
 				v-if="showItemCollection"
-				class="fish-leaf fish-not-in-collection"
+				:class="checkedFish ? 'fish-leaf' : 'fish-leaf fish-not-in-collection'"
 				@click.stop="addOrRemoveFromCollection(id)">
 			</div>
 	 	</div>
@@ -18,6 +18,7 @@
 </template>
 
 <script setup lang="ts">
+import { onBeforeMount, reactive, ref } from 'vue'
 import router from "@/router";
 import { useFishesStore } from "@/stores/fishes";
 
@@ -28,23 +29,28 @@ const props = defineProps({
   name: String,
   image: String,
   showItemCollection: Boolean,
+  hasFish: Boolean,
 })
+
+let checkedFish = ref<Boolean>(false);
 
 async function goToDetailFish(id: Number) {
   router.push({ name: "fish", params: { id: id } });
 }
 
-function isInCollection (id: Number) {
-	const resp = fishesStore.getFishInCollection(id)
-	console.log(resp)
-}
-
 function addOrRemoveFromCollection (id: Number) {
-	//this.isInCollection(id)
-	//fishesStore.addFishInCollection(id)
-	//fishesStore.removeFishFromCollection(id)
+	if(checkedFish.value) {
+		fishesStore.removeFishFromCollection(id)
+		checkedFish.value = false;
+	} else {
+		fishesStore.addFishInCollection(id)
+		checkedFish.value = true
+	}
 }
 
+onBeforeMount(async () => {
+	checkedFish.value = props.hasFish
+})
 </script>
 
 <style scoped>

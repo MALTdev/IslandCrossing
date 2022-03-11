@@ -34,9 +34,9 @@
       <div class="text-center col-4 q-ma-lg-sm">
         <q-btn :to="{ name: 'profile-update' }" rounded color="accent" label="Modifier mon profil" text-color="black"/>
       </div>
-      <q-card class="text-center col-4 q-ma-lg bg-accent">
+      <q-card class="text-center col-4 q-ma-lg bg-accent" v-if="listInsect && listInsect.length > 0">
         <q-card-section>
-          <div class="text-left">
+          <div class="text-left text-bold">
             Insectes capturés
           </div>
           <swiper
@@ -47,14 +47,15 @@
               :space-between="5"
           >
             <swiper-slide v-for="insect in listInsect" :key="insect.id">
-              <img class="img-insect-swiper" :src="'/images/menu/' + insect.icon">
+              <img class="img-insect-swiper" :src="insect.image_url">
+              <span>{{ insect.name }}</span>
             </swiper-slide>
           </swiper>
         </q-card-section>
       </q-card>
-      <q-card class="text-center col-4 q-ma-lg bg-accent">
+      <q-card class="text-center col-4 q-ma-lg bg-accent" v-if="listFish && listFish.length > 0">
         <q-card-section>
-          <div class="text-left">
+          <div class="text-left text-bold">
             Poissons capturés
           </div>
           <swiper
@@ -65,14 +66,15 @@
               :space-between="5"
           >
             <swiper-slide v-for="fish in listFish" :key="fish.id">
-              <img class="img-fish-swiper" :src="'/images/menu/' + fish.icon">
+              <img class="img-fish-swiper" :src="fish.image_url">
+              <span>{{fish.name}}</span>
             </swiper-slide>
           </swiper>
         </q-card-section>
       </q-card>
-      <q-card class="text-center col-4 q-ma-lg bg-accent">
+      <!--<q-card class="text-center col-4 q-ma-lg bg-accent">
         <q-card-section>
-          <div class="text-left">
+          <div class="text-left text-bold">
             Créatures marines capturés
           </div>
           <swiper
@@ -87,8 +89,8 @@
             </swiper-slide>
           </swiper>
         </q-card-section>
-      </q-card>
-      <q-card class="text-center col-4 q-ma-lg bg-secondary">
+      </q-card>-->
+      <!--<q-card class="text-center col-4 q-ma-lg bg-secondary">
         <q-card-section>
           <div class="text-left">
             <q-img src="/images/pencil.png" style="height: 50px; max-width: 50px"></q-img>
@@ -103,14 +105,16 @@
             </div>
           </div>
         </q-card-section>
-      </q-card>
+      </q-card>-->
     </div>
   </q-page>
 </template>
 
 <script setup lang="ts">
 import { useUserStore } from "@/stores/user";
-import { ref } from "vue";
+import { useFishesStore } from "@/stores/fishes";
+import { useInsectsStore } from "@/stores/insects";
+import { onBeforeMount, ref } from 'vue'
 
 import { Navigation, Pagination } from 'swiper';
 // Import Swiper Vue.js components
@@ -122,6 +126,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 const { user } = useUserStore();
+const fishesStore = useFishesStore();
+const insectsStore = useInsectsStore();
 
 const modules = [Navigation, Pagination];
 
@@ -147,104 +153,9 @@ const listPlatforms = ref<Array<Object>>([
   }
 ])
 
-const listInsect = ref<Array<Object>>([
-  {
-    id: 1,
-    icon: 'bug.png',
-    text: 'Insectes1',
-  },
-  {
-    id: 2,
-    icon: 'bug.png',
-    text: 'Insectes2',
-  },
-  {
-    id: 3,
-    icon: 'bug.png',
-    text: 'Insectes3',
-  },
-  {
-    id: 4,
-    icon: 'bug.png',
-    text: 'Insectes4',
-  },
-  {
-    id: 5,
-    icon: 'bug.png',
-    text: 'Insectes5',
-  },
-  {
-    id: 6,
-    icon: 'bug.png',
-    text: 'Insectes6',
-  }
-])
+let listInsect = ref<Array<Object>>([])
 
-const listFish = ref<Array<Object>>([
-  {
-    id: 1,
-    icon: 'fish.png',
-    text: 'Poisson1',
-  },
-  {
-    id: 2,
-    icon: 'fish.png',
-    text: 'Poisson2',
-  },
-  {
-    id: 3,
-    icon: 'fish.png',
-    text: 'Poisson3',
-  },
-  {
-    id: 4,
-    icon: 'fish.png',
-    text: 'Poisson4',
-  },
-  {
-    id: 5,
-    icon: 'fish.png',
-    text: 'Poisson5',
-  },
-  {
-    id: 6,
-    icon: 'fish.png',
-    text: 'Poisson6',
-  }
-])
-
-const listCreature = ref<Array<Object>>([
-  {
-    id: 1,
-    icon: 'creature.png',
-    text: 'Creature1',
-  },
-  {
-    id: 2,
-    icon: 'creature.png',
-    text: 'Creature2',
-  },
-  {
-    id: 3,
-    icon: 'creature.png',
-    text: 'Creature3',
-  },
-  {
-    id: 4,
-    icon: 'creature.png',
-    text: 'Creature4',
-  },
-  {
-    id: 5,
-    icon: 'creature.png',
-    text: 'Creature5',
-  },
-  {
-    id: 6,
-    icon: 'creature.png',
-    text: 'Creature6',
-  }
-])
+let listFish = ref<Array<Object>>([])
 
 const listPublications = ref<Array<Object>>([
   {
@@ -270,6 +181,10 @@ const listPublications = ref<Array<Object>>([
 
 ])
 
+onBeforeMount(async () => {
+  listInsect.value = await insectsStore.getInsectsUser();
+	listFish.value = await fishesStore.getFishesUser();
+})
 </script>
 
 <style lang="scss">
