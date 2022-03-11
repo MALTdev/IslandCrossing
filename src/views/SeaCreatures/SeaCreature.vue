@@ -4,7 +4,14 @@
 	<h1>Créature : {{ seaCreature.name }}</h1>
 
     <section id="section-sea-creature-detail">
-		Prix de vente : {{ seaCreature.price }} clochettes
+		<q-img class="sea-creature-image" :src="seaCreature.image_url" fit="scale-down"/>
+	</section>
+	<section>
+		<p><span class="text-bold">Période :</span> {{ seaCreature.period }}</p>
+		<p><span class="text-bold">Heures :</span> {{ seaCreature.hours }}</p>
+		<p><span class="text-bold">Lieu :</span> {{ seaCreature.place }}</p>
+		<p><span class="text-bold">Mouvement :</span> {{ seaCreature.movement }}</p>
+		<p><span class="text-bold">Prix de vente :</span> {{ seaCreature.price }} clochettes</p>
 	</section>
   </q-page>
 </template>
@@ -25,7 +32,6 @@ const seaCreature = ref<SeaCreature>(null)
 onBeforeMount(async() => {
 	try {
 		seaCreature.value = await seaCreaturesStore.getSeaCreature(route.params.id);
-		console.log(seaCreature.value)
 	} catch (error) {
 		$q.notify({
 			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",

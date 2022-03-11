@@ -6,7 +6,7 @@
     <section id="section-character-detail">
 		<section id="section-character-informations">
 			<div id="character-detail-image">
-				<q-img id="character-image" :src="character.image" fit="scale-down"/>
+				<q-img id="character-image" :src="character.photoImage" fit="scale-down"/>
 			</div>
 			<table>
 				<tbody>
@@ -14,17 +14,13 @@
 						<td class="character-label text-uppercase text-bold">Nom</td>
 						<td>{{ character.name }}</td>
 					</tr>
-					<tr>
+					<tr v-if="character.species">
 						<td class="character-label text-uppercase text-bold">Espèce</td>
 						<td>{{ character.species.name }}</td>
 					</tr>
 					<tr>
 						<td class="character-label text-uppercase text-bold">Date d'anniversaire</td>
-						<td>{{ character.birthdayDate }}</td>
-					</tr>
-					<tr>
-						<td class="character-label text-uppercase text-bold">Signe astrologique</td>
-						<td>{{ character.astrologic }}</td>
+						<td>{{ character.birthday_day }} {{ character.birthday_month }}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -52,7 +48,6 @@ const character = ref<Character>(null)
 onBeforeMount(async() => {
 	try {
 		character.value = await charactersStore.getCharacter(route.params.id);
-		console.log(character.value)
 	} catch (error) {
 		$q.notify({
 			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",

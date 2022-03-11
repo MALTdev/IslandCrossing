@@ -14,23 +14,35 @@
 			</ul>
 		</q-card-section>
 		<q-card-section id="section-filters">
-			<q-input
+			<q-select
               v-model="filters.name"
-              type="text"
               label="Nom de l'habitant"
+			  :options="namesVillagers"
 			  class="field"
+			  :option-value="(item) => item === null ? null : item.code"
+         	  option-label="name"
+			  @update:model-value ="filtersVillagers()"
+			  clearable
             />
 			<q-select
               v-model="filters.species"
               label="Espèce de l'habitant"
 			  :options="species"
 			  class="field"
+			  :option-value="(item) => item === null ? null : item.code"
+         	  option-label="name"
+			  @update:model-value ="filtersVillagers()"
+			  clearable
             />
 			<q-select
-              v-model="filters.personnality"
+              v-model="filters.personalities"
               label="Personnalité de l'habitant"
-			  :options="personnalities"
+			  :options="personalities"
 			  class="field"
+			  :option-value="(item) => item === null ? null : item.code"
+         	  option-label="name"
+			  @update:model-value ="filtersVillagers()"
+			  clearable
             />
 		</q-card-section>
 	</q-card>
@@ -52,38 +64,37 @@ import { onBeforeMount, reactive, ref } from 'vue'
 import VillagerCard from '@/components/Cards/Villager.vue'
 import { useQuasar } from "quasar";
 import { useVillagersStore } from "@/stores/villagers";
+import { useSpeciesStore } from "@/stores/species";
+import { usePersonalitiesStore } from "@/stores/personalities";
 import type { Villager } from "@/stores/villagers";
+import type { Specie } from "@/stores/species";
+import type { Personality } from "@/stores/personalities";
 
 const $q = useQuasar();
 const villagersStore = useVillagersStore();
+const speciesStore = useSpeciesStore();
+const personalitiesStore = usePersonalitiesStore();
 
 const filters = reactive({
-  name: "",
-  species: "",
-  personnality: "",
+  name: '',
+  species: '',
+  personalities: '',
 });	
 
-const species = ref<Array<String>>([
-	'Pingouin',
-	'Tigre',
-	'Chat',
-	'Aigle',
-	'Crocodile',
-	'Elephant',
-])
+let species = ref<Array<Specie>>([])
 
-const personnalities = ref<Array<String>>([
-	'Chic',
-	'Paresseux',
-	'Sportif',
-	'Arrogante',
-])
+let personalities = ref<Array<Personality>>([])
+
+let namesVillagers = ref<Array<Villager>>([])
 
 let villagers = ref<Array<Villager>>([])
 
 onBeforeMount(async () => {
 	try {
 		villagers.value = await villagersStore.getVillagers();
+		species.value = await speciesStore.getSpeciesNames();
+		personalities.value = await personalitiesStore.getPersonalitiesNames();
+		namesVillagers.value = await villagersStore.getNamesAndCodeVillagers();
 	} catch (error) {
 		$q.notify({
 			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",
@@ -91,6 +102,12 @@ onBeforeMount(async () => {
 		});
 	}
 })
+
+async function filtersVillagers() {
+	let query = '&name=' + filters.name?.code + '&species=' + filters.species?.code + '&personalities=' + filters.personalities?.code;
+	query = query.replace(/undefined/g, '')
+	villagers.value = await villagersStore.getVillagersFiltered(query)
+}
 
 </script>
 

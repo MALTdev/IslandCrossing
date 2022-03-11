@@ -24,5 +24,15 @@ export const useSpeciesStore = defineStore("speciesStore", () => {
     });
   }
 
-  return { getSpecies };
+  function getSpeciesNames() {
+    return new Promise(async (resolve, reject) => {
+      const species = await (
+        await axios.get(`/api/species/getnames?api_token=${getToken}`)
+      ).data;
+
+      return resolve(species);
+    });
+  }
+
+  return { getSpecies, getSpeciesNames };
 });

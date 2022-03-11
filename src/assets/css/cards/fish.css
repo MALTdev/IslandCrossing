@@ -35,10 +35,6 @@
 	filter: grayscale(1);
 }
 
-.fish-image {
-	max-height: 100px;
-}
-
 .fish-name > span {
 	font-size: 1.5em;
 }

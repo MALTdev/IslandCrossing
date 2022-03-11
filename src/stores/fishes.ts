@@ -33,16 +33,25 @@ export const useFishesStore = defineStore("fishesStore", () => {
     });
   }
 
-  function addFishInCollection(id: number) {
-    console.log('fish id: ' + id)
+  function getFishInCollection(idFish: number) {
+    return new Promise(async (resolve, reject) => {
+      const fish = await (
+        await axios.get(`/api/has_fish?api_token=${getToken}&user_id=${getUserId}&fish_id=${idFish}`)
+      ).data;
+
+      return resolve(fish);
+    });
+  }
+
+  function addFishInCollection(idFish: number) {
     // getUserId
     // @todo
   }
 
-  function removeFishFromCollection(id: number) {
+  function removeFishFromCollection(idFish: number) {
     // getUserId
     // @todo
   }
 
-  return { getFishes, getFish, addFishInCollection, removeFishFromCollection };
+  return { getFishes, getFish, getFishInCollection, addFishInCollection, removeFishFromCollection };
 });

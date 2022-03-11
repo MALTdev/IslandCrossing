@@ -15,7 +15,7 @@
 			:key="insect.id"
 			:id="insect.id"
 			:name="insect.name"
-			:image="insect.image"
+			:image="insect.image_url"
 			:show-item-collection="true"
 		/>
 	</section>
@@ -38,7 +38,6 @@ const insects = ref<Array<Insect>>([])
 onBeforeMount(async () => {
 	try {
 		insects.value = await insectsStore.getInsects();
-		console.log(insects.value)
 	} catch (error) {
 		$q.notify({
 			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",

@@ -39,6 +39,27 @@ export const useVillagersStore = defineStore("villagersStore", () => {
     });
   }
 
+  function getNamesAndCodeVillagers() {
+    return new Promise(async (resolve, reject) => {
+      const namesVillagers = await (
+        await axios.get(`/api/villagers/getnames?api_token=${getToken}`)
+      ).data;
+
+      return resolve(namesVillagers);
+    });
+  }
+
+  //function getVillagersFiltered(param: string, value: string) {
+  function getVillagersFiltered(params: string) {
+	return new Promise(async (resolve, reject) => {
+		const villagers = await (
+		  await axios.get(`/api/villagers/search?api_token=${getToken}${params}`)
+		).data;
+  
+		return resolve(villagers);
+	  });
+  }
+
   function getVillager(id: number) {
     return new Promise(async (resolve, reject) => {
       const villager = await (
@@ -49,5 +70,15 @@ export const useVillagersStore = defineStore("villagersStore", () => {
     });
   }
 
-  return { getVillagers, getVillager };
+  function getVillagersBirthdays() {
+    return new Promise(async (resolve, reject) => {
+      const villager = await (
+        await axios.get(`/api/villagers-anniversary-today?api_token=${getToken}`)
+      ).data;
+
+      return resolve(villager);
+    });
+  }
+
+  return { getVillagers, getNamesAndCodeVillagers, getVillagersFiltered, getVillager,getVillagersBirthdays };
 });

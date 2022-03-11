@@ -5,16 +5,16 @@
 		<section id="section-music-image">
 			<h1>{{ music.name }}</h1>
 			<div id="music-image-and-audio">
-				<q-img :src="music.image" class="music-image" fit="cover"/>
+				<q-img :src="music.image_url" class="music-image" fit="cover"/>
 				<audio class="audiofile" controls>
-					<source :src="music.audioFile" type="audio/mp3"/>
+					<source :src="music.music_url"/>
 				</audio>
-				<span id="music-genre">{{ music.genre }}</span>
 			</div>
 		</section>
 		
 		<section id="music-more-info">
-			<p>{{ music.description }}</p>
+			<p>Prix d'achat : {{ music.price }} clochettes</p>
+			<p>Prix de vente : {{ music.sell_price }} clochettes</p>
 		</section>
 	</section>    
   </q-page>
@@ -36,7 +36,6 @@ const music = ref<Music>(null)
 onBeforeMount(async() => {
 	try {
 		music.value = await musicsStore.getMusic(route.params.id);
-		console.log(music.value)
 	} catch (error) {
 		$q.notify({
 			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",

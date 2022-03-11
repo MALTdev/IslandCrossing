@@ -8,7 +8,7 @@
 			<div class="first-section">
 				<div>
 					<q-icon 
-						v-if="villager.gender_id === 'male'"
+						v-if="villager?.gender?.name === 'Mâle'"
 						name="fas fa-mars"
 						color="blue"
 					/>
@@ -20,11 +20,11 @@
 				</div>
 				<div>
 					<span class="text-bold">Espèce : </span>
-					<span>{{ villager.species_id }}</span>
+					<span>{{ villager?.species?.name }}</span>
 				</div>
 				<div>
 					<span class="text-bold">Personnalité : </span>
-					<span>{{ villager.personality_id }}</span>
+					<span>{{ villager?.personality?.name }}</span>
 				</div>
 			</div>
 
@@ -75,7 +75,8 @@ const villager = ref<Villager>(null)
 
 onBeforeMount(async() => {
 	try {
-		villager.value = await villagersStore.getVillager(route.params.id);
+		villager.value = (await villagersStore.getVillager(route.params.id))[0];
+		console.log(villager.value);
 	} catch (error) {
 		$q.notify({
 			message: "Une erreur est survenu. Veuillez conctacter un administrateur.",
