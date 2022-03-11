@@ -34,7 +34,7 @@
       <div class="text-center col-4 q-ma-lg-sm">
         <q-btn :to="{ name: 'profile-update' }" rounded color="accent" label="Modifier mon profil" text-color="black"/>
       </div>
-      <q-card class="text-center col-4 q-ma-lg bg-accent">
+      <q-card class="text-center col-4 q-ma-lg bg-accent" v-if="listInsect && listInsect.length > 0">
         <q-card-section>
           <div class="text-left text-bold">
             Insectes capturés
@@ -53,7 +53,7 @@
           </swiper>
         </q-card-section>
       </q-card>
-      <q-card class="text-center col-4 q-ma-lg bg-accent">
+      <q-card class="text-center col-4 q-ma-lg bg-accent" v-if="listFish && listFish.length > 0">
         <q-card-section>
           <div class="text-left text-bold">
             Poissons capturés
