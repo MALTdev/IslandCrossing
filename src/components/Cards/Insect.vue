@@ -7,7 +7,7 @@
 			<q-img :src="image" class="insect-image" fit="scale-down"/>
 			<div
 				v-if="showItemCollection"
-				class="insect-leaf insect-not-in-collection"
+				:class="checkedInsect ? 'insect-leaf' : 'insect-leaf insect-not-in-collection'"
 				@click.stop="addOrRemoveFromCollection(id)">
 			</div>
 	 	</div>
@@ -18,6 +18,7 @@
 </template>
 
 <script setup lang="ts">
+import { onBeforeMount, reactive, ref } from 'vue'
 import router from "@/router";
 import { useInsectsStore } from "@/stores/insects";
 
@@ -28,17 +29,28 @@ const props = defineProps({
   name: String,
   image: String,
   showItemCollection: Boolean,
+  hasInsect: Boolean,
 })
+
+let checkedInsect = ref<Boolean>(false);
 
 async function goToDetailInsect(id: Number) {
   router.push({ name: "insect", params: { id: id } });
 }
 
 function addOrRemoveFromCollection (id: Number) {
-	insectsStore.addInsectInCollection(id)
-	//insectsStore.removeInsectFromCollection(id)
+	if(checkedInsect.value) {
+		insectsStore.removeInsectFromCollection(id)
+		checkedInsect.value = false;
+	} else {
+		insectsStore.addInsectInCollection(id)
+		checkedInsect.value = true
+	}
 }
 
+onBeforeMount(async () => {
+	checkedInsect.value = props.hasInsect
+})
 </script>
 
 <style scoped>
