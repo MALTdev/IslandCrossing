@@ -27,7 +27,7 @@
               </template>
             </q-input>
             <q-input
-              v-model="form.passwordConfirm"
+              v-model="form.password_confirmation"
               :type="showPassword ? 'text' : 'password'"
               label="Confirmation du mot de passe"
             >
@@ -63,20 +63,38 @@ import { reactive, ref } from "vue";
 import { RouterLink } from "vue-router";
 import router from "@/router";
 
+import { useQuasar } from "quasar";
 import { useUserStore } from "@/stores/user";
+
+const $q = useQuasar();
 const userStore = useUserStore();
 
 const form = reactive({
   email: "",
   username: "",
   password: "",
-  passwordConfirm: "",
+  password_confirmation: "",
 });
 
 async function register() {
-  const { username, password } = form;
-  await userStore.register({ email: username, password });
-  router.push({ name: "profile" });
+  if (form.password === form.password_confirmation) {
+    const { email, username, password, password_confirmation: password_confirmation } = form;
+
+    try {
+      await userStore.register({ email, username, password, password_confirmation });
+      router.push({ name: "profile" });
+
+      $q.notify({
+        message: `Bienvenue parmi nous ${userStore.user.username} !`,
+        type: "positive",
+      });
+    } catch (error: any) {
+      $q.notify({
+        message: error || "Une erreur est survenu lors de l'inscription.",
+        type: "negative",
+      });
+    }
+  }
 }
 
 const showPassword = ref(false);
