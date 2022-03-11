@@ -26,7 +26,7 @@
               <div class="col">
                 <q-select
                   v-model="form.favoriteSerie"
-                  :options="['Série A', 'Série B']"
+                  :options="setFurnitures"
                   label="Série préférée"
                 />
               </div>
@@ -78,7 +78,10 @@
 
 <script setup lang="ts">
 import { onBeforeMount, reactive, ref } from "vue";
+import { useSetFurnituresStore } from "@/stores/setFurnitures";
 import { RouterLink } from "vue-router";
+
+const setFurnituresStore = useSetFurnituresStore();
 
 interface PlatformCode {
   platform: string;
@@ -91,6 +94,8 @@ const platforms = ref([
   { label: "Switch", value: "switch", selected: false },
 ]);
 
+let setFurnitures = ref([])
+
 const form = reactive({
   username: "",
   description: "",
@@ -98,13 +103,16 @@ const form = reactive({
   platforms: [] as PlatformCode[],
 });
 
-onBeforeMount(() => {
+onBeforeMount(async () => {
   platforms.value.forEach((platform) =>
     form.platforms.push({
       platform: platform.label,
       code: "",
     })
   );
+
+  setFurnitures = await setFurnituresStore.getSetFurnitures()
+  console.log(setFurnitures)
 });
 
 function updateProfile() {
