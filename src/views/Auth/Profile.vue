@@ -8,7 +8,7 @@
             <strong>Mon profil</strong>
           </div>
           <div class="float-right">
-            <img src="@/assets/images/menu/villager.png" alt="">
+            <img src="/images/menu/villager.png" alt="">
             <div class="bg-brown pseudo-profile">
               {{ user.username }}
             </div>
@@ -85,7 +85,7 @@
               :space-between="5"
           >
             <swiper-slide v-for="creature in listCreature" :key="creature.id">
-              <img class="img-creatures-swiper" :src="'src/assets/images/menu/' + creature.icon">
+              <img class="img-creatures-swiper" :src="'/images/menu/' + creature.icon">
             </swiper-slide>
           </swiper>
         </q-card-section>
@@ -93,13 +93,13 @@
       <!--<q-card class="text-center col-4 q-ma-lg bg-secondary">
         <q-card-section>
           <div class="text-left">
-            <q-img src="@/assets/images/pencil.png" style="height: 50px; max-width: 50px"></q-img>
+            <q-img src="/images/pencil.png" style="height: 50px; max-width: 50px"></q-img>
             Publications partagées
           </div>
           <div class="q-pa-md">
             <div class="box-grid">
               <div v-for="publis in listPublications" :key="publis.id">
-                <q-img :src="'src/assets/images/publications/' + publis.icon" style="max-width: 300px; height: 150px;" />
+                <q-img :src="'/images/publications/' + publis.icon" style="max-width: 300px; height: 150px;" />
                 <div> {{ publis.text }} </div>
               </div>
             </div>
