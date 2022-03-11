@@ -13,15 +13,22 @@ export interface User {
   description?: string;
 }
 
-interface AuthForm {
+interface LoginForm {
   email: string;
   password: string;
+}
+
+interface RegisterForm {
+  email: string;
+  username: string;
+  password: string;
+  password_confirmation: string;
 }
 
 export const useUserStore = defineStore("userStore", () => {
   const user = ref(useLocalStorage<User>("user", {}));
 
-  function login(form: AuthForm) {
+  function login(form: LoginForm) {
     return new Promise(async (resolve, reject) => {
       const xsrfToken = (await http.get("/api/token")).data;
 
@@ -46,8 +53,29 @@ export const useUserStore = defineStore("userStore", () => {
     });
   }
 
-  async function register(form: AuthForm) {
-    // TODO
+  async function register(form: RegisterForm) {
+    return new Promise(async (resolve, reject) => {
+      const xsrfToken = (await http.get("/api/token")).data;
+
+      const { success, message, api_token } = (
+        await http.post("/api/register", form, {
+          headers: { "XSRF-TOKEN": xsrfToken },
+        })
+      ).data;
+
+      if (!success) return reject(message);
+
+      const userInformations = (
+        await http.get(`/api/me?api_token=${api_token}`)
+      ).data;
+
+      user.value = {
+        api_token,
+        ...userInformations,
+      };
+
+      return resolve(user.value.username);
+    });
   }
 
   async function logout() {
