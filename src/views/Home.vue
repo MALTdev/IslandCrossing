@@ -128,7 +128,7 @@ const itemsMenu = ref<Array<Object>>([
   },
   {
     icon: 'music.png',
-    text: 'Musique',
+    text: 'Musiques',
     route: 'musics',
   },
   {
