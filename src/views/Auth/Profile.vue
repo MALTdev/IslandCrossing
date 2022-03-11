@@ -34,7 +34,7 @@
       <div class="text-center col-4 q-ma-lg-sm">
         <q-btn :to="{ name: 'profile-update' }" rounded color="accent" label="Modifier mon profil" text-color="black"/>
       </div>
-      <!--<q-card class="text-center col-4 q-ma-lg bg-accent">
+      <q-card class="text-center col-4 q-ma-lg bg-accent">
         <q-card-section>
           <div class="text-left text-bold">
             Insectes capturés
@@ -47,11 +47,12 @@
               :space-between="5"
           >
             <swiper-slide v-for="insect in listInsect" :key="insect.id">
-              <img class="img-insect-swiper" :src="'src/assets/images/menu/' + insect.icon">
+              <img class="img-insect-swiper" :src="insect.image_url">
+              <span>{{ insect.name }}</span>
             </swiper-slide>
           </swiper>
         </q-card-section>
-      </q-card>-->
+      </q-card>
       <q-card class="text-center col-4 q-ma-lg bg-accent">
         <q-card-section>
           <div class="text-left text-bold">
@@ -112,6 +113,7 @@
 <script setup lang="ts">
 import { useUserStore } from "@/stores/user";
 import { useFishesStore } from "@/stores/fishes";
+import { useInsectsStore } from "@/stores/insects";
 import { onBeforeMount, ref } from 'vue'
 
 import { Navigation, Pagination } from 'swiper';
@@ -125,6 +127,7 @@ import 'swiper/css/pagination';
 
 const { user } = useUserStore();
 const fishesStore = useFishesStore();
+const insectsStore = useInsectsStore();
 
 const modules = [Navigation, Pagination];
 
@@ -150,38 +153,7 @@ const listPlatforms = ref<Array<Object>>([
   }
 ])
 
-const listInsect = ref<Array<Object>>([
-  {
-    id: 1,
-    icon: 'bug.png',
-    text: 'Insectes1',
-  },
-  {
-    id: 2,
-    icon: 'bug.png',
-    text: 'Insectes2',
-  },
-  {
-    id: 3,
-    icon: 'bug.png',
-    text: 'Insectes3',
-  },
-  {
-    id: 4,
-    icon: 'bug.png',
-    text: 'Insectes4',
-  },
-  {
-    id: 5,
-    icon: 'bug.png',
-    text: 'Insectes5',
-  },
-  {
-    id: 6,
-    icon: 'bug.png',
-    text: 'Insectes6',
-  }
-])
+let listInsect = ref<Array<Object>>([])
 
 let listFish = ref<Array<Object>>([])
 
@@ -210,8 +182,8 @@ const listPublications = ref<Array<Object>>([
 ])
 
 onBeforeMount(async () => {
+  listInsect.value = await insectsStore.getInsectsUser();
 	listFish.value = await fishesStore.getFishesUser();
-  console.log(listFish)
 })
 </script>
 

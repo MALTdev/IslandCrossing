@@ -39,8 +39,7 @@ async function goToDetailFish(id: Number) {
 }
 
 function addOrRemoveFromCollection (id: Number) {
-	if(props.hasFish) {
-		console.log('remove')
+	if(checkedFish.value) {
 		fishesStore.removeFishFromCollection(id)
 		checkedFish.value = false;
 	} else {
