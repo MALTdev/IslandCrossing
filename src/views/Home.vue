@@ -211,7 +211,7 @@ function getNextBirthday() {
   }
 }
 
-function goToFicheVillager(idVillager: number) {
+function goToFicheVillager(idVillager: number | undefined) {
   router.push({ name: "villager", params: { id: idVillager } });
 }
 
