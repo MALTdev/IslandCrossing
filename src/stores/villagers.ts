@@ -4,9 +4,9 @@ import http from "@/plugins/axios";
 import { useUserStore } from "@/stores/user";
 
 export interface Villager {
-  id: number;
+  id?: number;
   birthday_day?: number;
-  birthday_montyh?: string;
+  birthday_month?: string;
   catchphrase?: string;
   clothing?: string;
   code?: string;
@@ -22,6 +22,15 @@ export interface Villager {
   species_id?: number;
   updated_at?: string;
   url?: string;
+  gender?: {
+    name?: string;
+  };
+  species?: {
+    name?: string;
+  };
+  personality?: {
+    name?: string;
+  };
 }
 
 export const useVillagersStore = defineStore("villagersStore", () => {
