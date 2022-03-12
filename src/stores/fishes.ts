@@ -1,67 +1,81 @@
-import { ref } from "vue";
 import { defineStore } from "pinia";
-import { useLocalStorage } from "@vueuse/core";
 import http from "@/plugins/axios";
-import { useUserStore } from "@/stores/user"
-import type { User } from "@/stores/user"
+
+import { useUserStore } from "@/stores/user";
 
 export interface Fish {
-	id?: number;
+  id?: number;
+  name?: string;
+  image_url?: string;
+  place?: string;
+  period?: string;
+  hours?: string;
+  size?: number;
+  price?: number;
+  hasFish?: boolean;
 }
 
 export const useFishesStore = defineStore("fishesStore", () => {
-  const {getToken} = useUserStore()
-  const {getUserId} = useUserStore()
+  const { getToken, getUserId } = useUserStore();
 
-  function getFishes() {
+  function getFishes(): Promise<Fish[]> {
     return new Promise(async (resolve, reject) => {
-      const fishes = await (
-        await http.get(`/api/fishes?api_token=${getToken}`)
-      ).data;
+      const fishes = (await http.get(`/api/fishes?api_token=${getToken}`)).data;
 
       return resolve(fishes);
     });
   }
 
-  function getFish(id: number) {
+  function getFish(id: number): Promise<Fish> {
     return new Promise(async (resolve, reject) => {
-      const fish = await (
-        await http.get(`/api/fishes/${id}?api_token=${getToken}`)
+      const fish = (await http.get(`/api/fishes/${id}?api_token=${getToken}`))
+        .data;
+
+      return resolve(fish);
+    });
+  }
+
+  function getFishesUser(): Promise<Fish[]> {
+    return new Promise(async (resolve, reject) => {
+      const fish = (
+        await http.get(
+          `/api/user-fishes?api_token=${getToken}&user_id=${getUserId}`
+        )
       ).data;
 
       return resolve(fish);
     });
   }
 
-  function getFishesUser() {
+  function addFishInCollection(idFish: number): Promise<Fish> {
     return new Promise(async (resolve, reject) => {
-      const fish = await (
-        await http.get(`/api/user-fishes?api_token=${getToken}&user_id=${getUserId}`)
+      const fish = (
+        await http.post(
+          `/api/has-fish-user?api_token=${getToken}&user_id=${getUserId}&fish_id=${idFish}`
+        )
       ).data;
 
       return resolve(fish);
     });
   }
 
-  function addFishInCollection(idFish: number) {
+  function removeFishFromCollection(idFish: number): Promise<Fish> {
     return new Promise(async (resolve, reject) => {
-      const fish = await (
-        await http.post(`/api/has-fish-user?api_token=${getToken}&user_id=${getUserId}&fish_id=${idFish}`)
+      const fish = (
+        await http.delete(
+          `/api/has-fish-user-remove?api_token=${getToken}&user_id=${getUserId}&fish_id=${idFish}`
+        )
       ).data;
 
       return resolve(fish);
     });
   }
 
-  function removeFishFromCollection(idFish: number) {
-    return new Promise(async (resolve, reject) => {
-      const fish = await (
-        await http.delete(`/api/has-fish-user-remove?api_token=${getToken}&user_id=${getUserId}&fish_id=${idFish}`)
-      ).data;
-
-      return resolve(fish);
-    });
-  }
-
-  return { getFishes, getFish, getFishesUser, addFishInCollection, removeFishFromCollection };
+  return {
+    getFishes,
+    getFish,
+    getFishesUser,
+    addFishInCollection,
+    removeFishFromCollection,
+  };
 });
