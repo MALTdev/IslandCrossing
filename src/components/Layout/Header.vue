@@ -26,11 +26,11 @@
       <div class="col-3 text-right">
         <audio src="../src/assets/audios/theme.mp3" loop></audio>
         <q-btn
-            @click="toggleAudio()"
-            icon="fab fa-soundcloud"
-            :class="audio_playing ? 'icon-sound' : 'icon-sound icon-sound-mute'"
-            round
-            flat
+          @click="toggleAudio()"
+          icon="fab fa-soundcloud"
+          :class="audio_playing ? 'icon-sound' : 'icon-sound icon-sound-mute'"
+          round
+          flat
         />
         <template v-if="userStore.user.id">
           <q-btn-dropdown
@@ -62,14 +62,20 @@
         </template>
       </div>
     </q-toolbar>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/svg-with-js.min.css" integrity="sha512-T22AGZA32A7BJVwM85+3QTgGxP7lSHb88UwE3b19YtWs0mw6x27Pw5ea/60BQkcKO4vzzsXW230pxPdw6TthGQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/svg-with-js.min.css"
+      integrity="sha512-T22AGZA32A7BJVwM85+3QTgGxP7lSHb88UwE3b19YtWs0mw6x27Pw5ea/60BQkcKO4vzzsXW230pxPdw6TthGQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </q-header>
 </template>
 
 <script setup lang="ts">
-import { RouterLink } from "vue-router";
-import router from "@/router";
 import { ref } from "vue";
+import router from "@/router";
+import { RouterLink } from "vue-router";
 
 import { useQuasar } from "quasar";
 import { useUserStore } from "@/stores/user";
@@ -77,7 +83,7 @@ import { useUserStore } from "@/stores/user";
 const $q = useQuasar();
 const userStore = useUserStore();
 
-const audio_playing = ref<Boolean>(false);
+const audio_playing = ref(false);
 
 async function logout() {
   try {
@@ -103,9 +109,8 @@ function toggleAudio() {
   } else {
     audio.pause();
   }
-  this.audio_playing = !audio.paused;
+  audio_playing.value = !audio.paused;
 }
-
 </script>
 
 <style scoped lang="scss">
