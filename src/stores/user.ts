@@ -11,6 +11,7 @@ export interface User {
   first_name?: string;
   last_name?: string;
   description?: string;
+  setFurniture?: string;
 }
 
 interface LoginForm {
