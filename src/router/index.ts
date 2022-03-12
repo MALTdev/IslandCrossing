@@ -13,32 +13,32 @@ import Blog from "@/views/Blog/Blog.vue";
 import BlogPost from "@/views/Blog/BlogPost.vue";
 
 // Villagers
-import Villagers from "@/views/Villagers/Villagers.vue";
-import Villager from "@/views/Villagers/Villager.vue";
+const Villagers = () => import("@/views/Villagers/Villagers.vue");
+const Villager = () => import("@/views/Villagers/Villager.vue");
 
 // Characters
-import Characters from "@/views/Characters/Characters.vue";
-import Character from "@/views/Characters/Character.vue";
+const Characters = () => import("@/views/Characters/Characters.vue");
+const Character = () => import("@/views/Characters/Character.vue");
 
 // Musics
-import Musics from "@/views/Musics/Musics.vue";
-import Music from "@/views/Musics/Music.vue";
+const Musics = () => import("@/views/Musics/Musics.vue");
+const Music = () => import("@/views/Musics/Music.vue");
 
 // Insects
-import Insects from "@/views/Insects/Insects.vue";
-import Insect from "@/views/Insects/Insect.vue";
+const Insects = () => import("@/views/Insects/Insects.vue");
+const Insect = () => import("@/views/Insects/Insect.vue");
 
 // Fishes
-import Fishes from "@/views/Fishes/Fishes.vue";
-import Fish from "@/views/Fishes/Fish.vue";
+const Fishes = () => import("@/views/Fishes/Fishes.vue");
+const Fish = () => import("@/views/Fishes/Fish.vue");
 
 // Creatures
-import SeaCreatures from "@/views/SeaCreatures/SeaCreatures.vue";
-import SeaCreature from "@/views/SeaCreatures/SeaCreature.vue";
+const SeaCreatures = () => import("@/views/SeaCreatures/SeaCreatures.vue");
+const SeaCreature = () => import("@/views/SeaCreatures/SeaCreature.vue");
 
 // Fossils
-import Fossils from "@/views/Fossils/Fossils.vue";
-import Fossil from "@/views/Fossils/Fossil.vue";
+const Fossils = () => import("@/views/Fossils/Fossils.vue");
+const Fossil = () => import("@/views/Fossils/Fossil.vue");
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
