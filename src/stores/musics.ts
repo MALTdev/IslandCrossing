@@ -1,32 +1,32 @@
-import { ref } from "vue";
 import { defineStore } from "pinia";
-import { useLocalStorage } from "@vueuse/core";
 import http from "@/plugins/axios";
-import { useUserStore } from "@/stores/user"
-import type { User } from "@/stores/user"
+
+import { useUserStore } from "@/stores/user";
 
 export interface Music {
-	id?: number;
+  id?: number;
+  name?: string;
+  image_url?: string;
+  music_url?: string;
+  price?: number;
+  sell_price?: number;
 }
 
 export const useMusicsStore = defineStore("musicsStore", () => {
-  const {getToken} = useUserStore()
+  const { getToken } = useUserStore();
 
-  function getMusics() {
+  function getMusics(): Promise<Music[]> {
     return new Promise(async (resolve, reject) => {
-      const musics = await (
-        await http.get(`/api/musics?api_token=${getToken}`)
-      ).data;
+      const musics = (await http.get(`/api/musics?api_token=${getToken}`)).data;
 
       return resolve(musics);
     });
   }
 
-  function getMusic(id: number) {
+  function getMusic(id: number): Promise<Music> {
     return new Promise(async (resolve, reject) => {
-      const music = await (
-        await http.get(`/api/musics/${id}?api_token=${getToken}`)
-      ).data;
+      const music = (await http.get(`/api/musics/${id}?api_token=${getToken}`))
+        .data;
 
       return resolve(music);
     });
