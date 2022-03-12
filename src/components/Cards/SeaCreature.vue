@@ -1,15 +1,12 @@
 <template>
-  	<div
-	  class="sea-creature"
-      @click="goToDetailSeaCreature(id)"
-	>
-		<div class="sea-creature-section-image">  
-			<q-img :src="image" class="sea-creature-image" fit="scale-down"/>
-	 	</div>
-		<div class="sea-creature-name">
-			<span class="text-white">{{ name }}</span>
-		</div>
-	</div>
+  <div class="sea-creature" @click="goToDetailSeaCreature(id)">
+    <div class="sea-creature-section-image">
+      <q-img :src="image" class="sea-creature-image" fit="scale-down" />
+    </div>
+    <div class="sea-creature-name">
+      <span class="text-white">{{ name }}</span>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -19,18 +16,17 @@ const props = defineProps({
   id: Number,
   name: String,
   image: String,
-})
+});
 
-async function goToDetailSeaCreature(id: Number) {
-  router.push({ name: "sea-creature", params: { id: id } });
+async function goToDetailSeaCreature(id: number | undefined) {
+  router.push({ name: "sea-creature", params: { id } });
 }
-
 </script>
 
 <style scoped>
-  @import '@/assets/css/cards/sea-creature.css';
+@import "@/assets/css/cards/sea-creature.css";
 </style>
 
 <style lang="scss" scoped>
-  @import '@/assets/scss/cards/sea-creature.scss';
+@import "@/assets/scss/cards/sea-creature.scss";
 </style>

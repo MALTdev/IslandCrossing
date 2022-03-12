@@ -1,20 +1,25 @@
-import { ref } from "vue";
 import { defineStore } from "pinia";
-import { useLocalStorage } from "@vueuse/core";
 import http from "@/plugins/axios";
-import { useUserStore } from "@/stores/user"
-import type { User } from "@/stores/user"
+
+import { useUserStore } from "@/stores/user";
 
 export interface SeaCreature {
-	id?: number;
+  id?: number;
+  name?: string;
+  image_url?: string;
+  period?: string;
+  hours?: string;
+  place?: string;
+  movement?: string;
+  price?: number;
 }
 
 export const useSeaCreaturesStore = defineStore("seaCreaturesStore", () => {
-  const {getToken} = useUserStore()
+  const { getToken } = useUserStore();
 
-  function getSeaCreatures() {
+  function getSeaCreatures(): Promise<SeaCreature[]> {
     return new Promise(async (resolve, reject) => {
-      const seaCreatures = await (
+      const seaCreatures = (
         await http.get(`/api/sea_creatures?api_token=${getToken}`)
       ).data;
 
@@ -22,9 +27,9 @@ export const useSeaCreaturesStore = defineStore("seaCreaturesStore", () => {
     });
   }
 
-  function getSeaCreature(id: number) {
+  function getSeaCreature(id: number): Promise<SeaCreature> {
     return new Promise(async (resolve, reject) => {
-      const seaCreature = await (
+      const seaCreature = (
         await http.get(`/api/sea_creatures/${id}?api_token=${getToken}`)
       ).data;
 
