@@ -1,22 +1,20 @@
-import { ref } from "vue";
 import { defineStore } from "pinia";
-import { useLocalStorage } from "@vueuse/core";
 import http from "@/plugins/axios";
-import { useUserStore } from "@/stores/user"
-import type { User } from "@/stores/user"
+
+import { useUserStore } from "@/stores/user";
 
 export interface Personality {
-	id?: number;
+  id?: number;
   code?: string;
   name?: string;
 }
 
 export const usePersonalitiesStore = defineStore("personalitiesStore", () => {
-  const {getToken} = useUserStore()
+  const { getToken } = useUserStore();
 
-  function getPersonalities() {
+  function getPersonalities(): Promise<Personality[]> {
     return new Promise(async (resolve, reject) => {
-      const personalities = await (
+      const personalities = (
         await http.get(`/api/personalities?api_token=${getToken}`)
       ).data;
 
@@ -24,9 +22,9 @@ export const usePersonalitiesStore = defineStore("personalitiesStore", () => {
     });
   }
 
-  function getPersonalitiesNames() {
+  function getPersonalitiesNames(): Promise<Personality[]> {
     return new Promise(async (resolve, reject) => {
-      const personalities = await (
+      const personalities = (
         await http.get(`/api/personalities/getnames?api_token=${getToken}`)
       ).data;
 
