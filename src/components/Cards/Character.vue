@@ -1,15 +1,12 @@
 <template>
-  	<div
-	  class="character"
-      @click="goToDetailCharacter(id)"
-	>
-		<div class="character-section-image">  
-			<q-img :src="image" class="character-image" fit="scale-down"/>
-	 	</div>
-		<div class="character-name">
-			<span class="text-white">{{ name }}</span>
-		</div>
-	</div>
+  <div class="character" @click="goToDetailCharacter(id)">
+    <div class="character-section-image">
+      <q-img :src="image" class="character-image" fit="scale-down" />
+    </div>
+    <div class="character-name">
+      <span class="text-white">{{ name }}</span>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -19,18 +16,17 @@ const props = defineProps({
   id: Number,
   name: String,
   image: String,
-})
+});
 
-async function goToDetailCharacter(id: Number) {
-  router.push({ name: "character", params: { id: id } });
+async function goToDetailCharacter(id: number | undefined) {
+  router.push({ name: "character", params: { id } });
 }
-
 </script>
 
 <style scoped>
-  @import '@/assets/css/cards/character.css';
+@import "@/assets/css/cards/character.css";
 </style>
 
 <style lang="scss" scoped>
-  @import '@/assets/scss/cards/character.scss';
+@import "@/assets/scss/cards/character.scss";
 </style>

@@ -1,20 +1,26 @@
-import { ref } from "vue";
 import { defineStore } from "pinia";
-import { useLocalStorage } from "@vueuse/core";
-import { useUserStore } from "@/stores/user"
-import type { User } from "@/stores/user"
 import http from "@/plugins/axios";
 
+import { useUserStore } from "@/stores/user";
+
 export interface Character {
-	id?: number;
+  id?: number;
+  name?: string;
+  photoImage?: string;
+  description?: string;
+  birthday_day?: number;
+  birthday_month?: number;
+  species?: {
+    name?: string;
+  };
 }
 
 export const useCharactersStore = defineStore("charactersStore", () => {
-  const {getToken} = useUserStore()
+  const { getToken } = useUserStore();
 
-  function getCharacters() {
+  function getCharacters(): Promise<Character[]> {
     return new Promise(async (resolve, reject) => {
-      const characters = await (
+      const characters = (
         await http.get(`/api/characters?api_token=${getToken}`)
       ).data;
 
@@ -22,9 +28,9 @@ export const useCharactersStore = defineStore("charactersStore", () => {
     });
   }
 
-  function getCharacter(id: number) {
+  function getCharacter(id: number): Promise<Character> {
     return new Promise(async (resolve, reject) => {
-      const character = await (
+      const character = (
         await http.get(`/api/characters/${id}?api_token=${getToken}`)
       ).data;
 
