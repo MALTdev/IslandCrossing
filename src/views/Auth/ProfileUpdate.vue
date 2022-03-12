@@ -78,8 +78,12 @@
 
 <script setup lang="ts">
 import { onBeforeMount, reactive, ref } from "vue";
-import { useSetFurnituresStore } from "@/stores/setFurnitures";
 import { RouterLink } from "vue-router";
+
+import {
+  useSetFurnituresStore,
+  type SetFurniture,
+} from "@/stores/setFurnitures";
 
 const setFurnituresStore = useSetFurnituresStore();
 
@@ -94,7 +98,7 @@ const platforms = ref([
   { label: "Switch", value: "switch", selected: false },
 ]);
 
-let setFurnitures = ref([])
+const setFurnitures = ref<SetFurniture[]>([]);
 
 const form = reactive({
   username: "",
@@ -111,8 +115,7 @@ onBeforeMount(async () => {
     })
   );
 
-  setFurnitures = await setFurnituresStore.getSetFurnitures()
-  console.log(setFurnitures)
+  setFurnitures.value = await setFurnituresStore.getSetFurnitures();
 });
 
 function updateProfile() {

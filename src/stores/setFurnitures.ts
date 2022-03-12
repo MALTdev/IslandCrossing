@@ -1,21 +1,19 @@
-import { ref } from "vue";
 import { defineStore } from "pinia";
-import { useLocalStorage } from "@vueuse/core";
 import http from "@/plugins/axios";
-import { useUserStore } from "@/stores/user"
-import type { User } from "@/stores/user"
+
+import { useUserStore } from "@/stores/user";
 
 export interface SetFurniture {
-	id?: number;
+  id?: number;
   label?: string;
 }
 
 export const useSetFurnituresStore = defineStore("setFurnituresStore", () => {
-  const {getToken} = useUserStore()
+  const { getToken } = useUserStore();
 
-  function getSetFurnitures() {
+  function getSetFurnitures(): Promise<SetFurniture[]> {
     return new Promise(async (resolve, reject) => {
-      const setFurnitures = await (
+      const setFurnitures = (
         await http.get(`/api/set_furnitures?api_token=${getToken}`)
       ).data;
 
