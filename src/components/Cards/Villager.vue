@@ -1,15 +1,12 @@
 <template>
-  	<div
-	  class="villager"
-      @click="goToDetailVillager(id)"
-	>
-		<div class="villager-section-image">  
-			<q-img :src="image" class="villager-image" fit="scale-down"/>
-	 	</div>
-		<div class="villager-name">
-			<span class="text-white">{{ name }}</span>
-		</div>
-	</div>
+  <div class="villager" @click="goToDetailVillager(id)">
+    <div class="villager-section-image">
+      <q-img :src="image" class="villager-image" fit="scale-down" />
+    </div>
+    <div class="villager-name">
+      <span class="text-white">{{ name }}</span>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -19,18 +16,17 @@ const props = defineProps({
   id: Number,
   name: String,
   image: String,
-})
+});
 
-async function goToDetailVillager(id: Number) {
-  router.push({ name: "villager", params: { id: id } });
+async function goToDetailVillager(id: number | undefined) {
+  router.push({ name: "villager", params: { id } });
 }
-
 </script>
 
 <style>
-  @import '@/assets/css/cards/villager.css';
+@import "@/assets/css/cards/villager.css";
 </style>
 
 <style lang="scss">
-  @import '@/assets/scss/cards/villager.scss';
+@import "@/assets/scss/cards/villager.scss";
 </style>
