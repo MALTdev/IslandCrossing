@@ -1,13 +1,12 @@
 <template>
   <q-parallax src="https://cdn.quasar.dev/img/mountains.jpg">
-    <div class="absolute-top-left q-ma-sm q-gutter-sm">
+    <div class="flex absolute-top-left q-ma-sm q-gutter-sm">
       <q-btn
         :to="{ name: 'blog' }"
         color="primary"
-        icon="fas fa-chevron-left"
+        icon="fas fa-caret-square-left"
         fab
       />
-      <q-btn color="secondary" icon="fas fa-share" fab />
     </div>
     <h1 class="text-white">Post {{ route.params.slug }}</h1>
   </q-parallax>
@@ -157,7 +156,6 @@
             v-model="newComment"
             type="textarea"
             label="Votre message"
-            bg-color="white"
             rounded
             filled
           />
@@ -165,7 +163,7 @@
             <q-btn
               label="Envoyer"
               type="submit"
-              color="secondary"
+              color="primary"
               class="full-width"
             />
           </div>

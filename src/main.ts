@@ -2,10 +2,16 @@ import { createApp } from "vue";
 
 import { createPinia } from "pinia";
 
-import router from "@/router";
+import { useUserStore } from "@/stores/user";
 
-import { Quasar } from "quasar";
-import quasarIconSet from "quasar/icon-set/svg-fontawesome-v5";
+import router from "@/router";
+router.beforeEach((to) => {
+  const userStore = useUserStore()
+  if (to.meta.requiresAuth && userStore.getToken === undefined) return '/login'
+})
+
+import { Quasar, Notify } from "quasar";
+import quasarIconSet from "quasar/icon-set/fontawesome-v5";
 import "@quasar/extras/fontawesome-v5/fontawesome-v5.css";
 import "quasar/src/css/index.sass";
 
@@ -20,7 +26,9 @@ app.use(createPinia());
 app.use(router);
 
 app.use(Quasar, {
-  plugins: {},
+  plugins: {
+    Notify,
+  },
   iconSet: quasarIconSet,
 });
 

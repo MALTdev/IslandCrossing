@@ -1,0 +1,36 @@
+#section-filters {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+#section-filters > .field {
+	width: 30%;
+}
+
+@media (max-width: 750px) {
+	#section-filters > .field {
+		width: 45%;
+	}
+}
+
+@media (max-width: 550px) {
+	#section-filters > .field {
+		width: 80%;
+	}
+}
+
+.list li {
+	width: fit-content;
+	margin: 0 auto;
+}
+
+#section-list {
+	padding-top: 50px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+	width: 80%;
+	margin:0 auto;
+}

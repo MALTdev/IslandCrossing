@@ -1,0 +1,59 @@
+#section-music {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#section-music-image {
+    width: max-content;
+    max-width: 25%;
+}
+
+#music-more-info {
+    width: 50%;
+    font-size: 1.4em;
+    padding: 25px 10px;
+    border-radius: 20px;
+}
+
+#music-image-and-audio {
+    position: relative;
+    max-width: 350px;
+    margin: 0 auto;
+    padding-top: 15px;
+}
+
+.music-image {
+	max-height: 300px;
+}
+
+.audiofile {
+    position: absolute;
+    bottom: -25px;
+    right: -50px;
+}
+
+#music-genre {
+    padding: 5px 35px;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: -75px;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 1150px) {
+	#section-music {
+        flex-direction: column;
+    }
+
+    #music-more-info {
+        width: 80%;
+    }
+
+    #section-music-image {
+        margin-bottom: 50px;
+        max-width: 80%
+    }
+}

@@ -19,3 +19,64 @@ main {
 .carousel-profile {
   background-color: $accent !important;
 }
+
+.box-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(160px, 1fr));
+  grid-gap: 50px;
+}
+
+.pseudo-profile {
+  margin-bottom: 20%;
+}
+
+.img-insect-swiper {
+  background-image: url("/images/patterns/herbes.jpg");
+  border-radius: 20px;
+  margin: 0 auto;
+  max-height: 150px;
+}
+
+.img-fish-swiper {
+  background-image: url("/images/patterns/water.jpeg");
+  border-radius: 20px;
+  margin: 0 auto;
+  max-height: 150px;
+}
+
+.img-creatures-swiper {
+  background-image: url("/images/patterns/deep_water.jpg");
+  border-radius: 20px;
+  margin: 0;
+  max-height: 150px;
+}
+
+.platform:hover .platform-code {
+  visibility: visible !important;
+}
+
+.swiper {
+  padding-bottom: 40px;
+}
+
+.swiper-pagination {
+  bottom: 0 !important;
+}
+
+.swiper-button-next, .swiper-button-prev {
+  top: 37%;
+}
+
+@media screen and (min-width: 992px) {
+  .col-4 {
+    width: 50% !important;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .col-4 {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}

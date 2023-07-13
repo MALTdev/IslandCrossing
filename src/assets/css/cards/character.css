@@ -1,0 +1,31 @@
+.character {
+	width: 26%;
+	border-radius: 50px 50px 0 0;
+	overflow: hidden;
+	padding-bottom: 50px;
+	cursor: pointer;
+}
+
+.character-section-image {
+	padding: 20px;
+}
+
+.character-image {
+	max-height: 250px;
+}
+
+.character-name > span {
+	font-size: 1.5em;
+}
+
+@media (max-width: 1200px) {
+	.character {
+		width: 45%;
+	}
+}
+
+@media (max-width: 600px) {
+	.character {
+		width: 80%;
+	}
+}

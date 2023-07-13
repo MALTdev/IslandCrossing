@@ -1,0 +1,32 @@
+.villager {
+	width: 26%;
+	border-radius: 50px 50px 0 0;
+	overflow: hidden;
+	padding-bottom: 50px;
+	cursor: pointer;
+}
+
+.villager-section-image {
+	background-image: url('/images/patterns/dots.png');
+	padding: 20px;
+}
+
+.villager-image {
+	max-height: 250px;
+}
+
+.villager-name > span {
+	font-size: 1.5em;
+}
+
+@media (max-width: 1200px) {
+	.villager {
+		width: 45%;
+	}
+}
+
+@media (max-width: 600px) {
+	.villager {
+		width: 80%;
+	}
+}

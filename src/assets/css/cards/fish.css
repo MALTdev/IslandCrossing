@@ -1,0 +1,59 @@
+.fish {
+	width: 15%;
+	border-radius: 30px 30px 0 0;
+	overflow: hidden;
+	padding-bottom: 50px;
+	cursor: pointer;
+}
+
+.fish-section-image {
+	background-image: url('/images/patterns/water.jpeg');
+	position: relative;
+}
+
+.fish-image {
+	max-height: 100px;
+}
+
+.fish-leaf {
+	position: absolute;
+	background-image: url('/images/leaf.png');
+	background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+	background-color: #fff;
+	padding: 5px;
+	bottom: 3px;
+	right: 3px;
+	width: 30px;
+	height:30px;
+	border: 5px solid #fff;
+	border-radius: 50%;
+}
+
+.fish-not-in-collection {
+	filter: grayscale(1);
+}
+
+.fish-name > span {
+	font-size: 1.5em;
+}
+
+
+@media (max-width: 850px) {
+	.fish {
+		width: 17%;
+	}
+}
+
+@media (max-width: 700px) {
+	.fish {
+		width: 23%;
+	}
+}
+
+@media (max-width: 550px) {
+	.fish {
+		width: 45%;
+	}
+}

@@ -10,9 +10,13 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.12.5",
+    "@vueuse/core": "^7.7.1",
+    "axios": "^0.26.0",
     "pinia": "^2.0.11",
     "quasar": "^2.5.5",
+    "swiper": "^8.0.7",
     "vue": "^3.2.29",
+    "vue-moment": "^4.1.0",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {
